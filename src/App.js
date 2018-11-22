@@ -10,6 +10,7 @@ export default function App() {
   const settingsOpen = useStore(state => state.settings.open);
   const edit = useAction(dispatch => dispatch.settings.edit);
   const toggleSettings = () => edit({ field: "open", value: !settingsOpen });
+  const nightmode = useStore(state => state.settings.nightmode);
 
   function handleClickSettings() {
     toggleSettings();
@@ -17,7 +18,10 @@ export default function App() {
 
   return (
     <div
-      className={cx(styles.container, { [styles.settingsOpen]: settingsOpen })}
+      className={cx(styles.container, {
+        [styles.settingsOpen]: settingsOpen,
+        [styles.nightmode]: nightmode,
+      })}
     >
       <Settings className={styles.settings} />
       <section className={styles.editor}>

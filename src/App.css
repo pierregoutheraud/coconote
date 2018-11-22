@@ -3,13 +3,17 @@
   width: 100%;
 }
 
+.container.nightmode .editor {
+  background: black;
+}
+
 .editor {
   position: relative;
   z-index: 2;
-  background: #f6f6f6;
-
+  /* background: #f6f6f6; */
   transition: transform 400ms;
   /* transition: margin 500ms; */
+  box-shadow: 0 0 60px 0 rgba(0, 0, 0, 0.2);
 }
 .container.settingsOpen .editor {
   transform: translate3d(300px, 0, 0);
@@ -39,4 +43,7 @@
 }
 .settingsButton:hover {
   opacity: 1;
+}
+.nightmode .settingsButton {
+  color: white;
 }

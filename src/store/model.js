@@ -1,11 +1,9 @@
-import { ContentState, EditorState } from "draft-js";
-import { DEFAULT_TEXT } from "../constants/constants";
-
 export default {
   settings: {
     open: false,
     font: "Roboto Mono",
     fontSize: 16,
+    nightmode: false,
     edit: (state, payload) => {
       const { field, value } = payload;
       state[field] = value;

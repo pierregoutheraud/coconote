@@ -1,6 +1,12 @@
 import { useState } from "react";
 import { useStore, useAction } from "easy-peasy";
-import { EditorState, convertFromRaw, convertToRaw } from "draft-js";
+import {
+  ContentState,
+  EditorState,
+  convertFromRaw,
+  convertToRaw,
+} from "draft-js";
+import { DEFAULT_TEXT } from "../constants/constants";
 
 let timeout = null;
 
@@ -10,13 +16,19 @@ export default function useEditorState() {
     dispatch => dispatch.editor.setContentStateRaw
   );
 
-  let initialEditorState;
-  if (typeof contentStateRaw === "undefined") {
-    initialEditorState = EditorState.createEmpty();
-  } else {
-    const contentState = convertFromRaw(contentStateRaw);
-    initialEditorState = EditorState.createWithContent(contentState);
-  }
+  const initialEditorState = EditorState.createWithContent(
+    ContentState.createFromText(DEFAULT_TEXT)
+  );
+
+  // let initialEditorState;
+  // if (typeof contentStateRaw === "undefined") {
+  //   initialEditorState = EditorState.createWithContent(
+  //     ContentState.createFromText(DEFAULT_TEXT)
+  //   );
+  // } else {
+  //   const contentState = convertFromRaw(contentStateRaw);
+  //   initialEditorState = EditorState.createWithContent(contentState);
+  // }
   const [editorState, _setEditorState] = useState(initialEditorState);
 
   function setEditorState(editorState, save = true) {

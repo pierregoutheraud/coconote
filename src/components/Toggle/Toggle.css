@@ -1,0 +1,29 @@
+.body {
+  cursor: pointer;
+  width: 44px;
+  height: 20px;
+  position: relative;
+  background: white;
+  border-radius: 30px;
+}
+
+.btn {
+  width: 14px;
+  height: 14px;
+  position: absolute;
+  top: calc(50% - 14px / 2);
+  left: 4px;
+  border-radius: 14px;
+  background: black;
+  cursor: pointer;
+  transform: translateX(0);
+  transition: 500ms;
+}
+
+.active .btn {
+  transform: translateX(22px);
+  background: goldenrod;
+}
+
+.active.body {
+}

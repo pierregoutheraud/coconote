@@ -1,3 +1,12 @@
+.container {
+  background: #f6f6f6;
+}
+
+.nightmode {
+  background: #1d1f21;
+  color: white;
+}
+
 :global(.DraftEditor-root) {
   flex: 1;
   /* We could also use ch here --> width: 80ch; */
