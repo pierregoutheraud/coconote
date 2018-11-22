@@ -1,7 +1,17 @@
-import React, { Component } from "react";
-import CodeMirror from "./components/CodeMirror/CodeMirror";
+import React, { Component, useEffect, useState } from "react";
+
+import Editor from "./components/Editor/Editor";
 import styles from "./App.css";
 
+export default function App() {
+  return (
+    <div className={styles.container}>
+      <Editor />
+    </div>
+  );
+}
+
+/*
 export default class App extends Component {
   state = {
     text: null,
@@ -66,3 +76,4 @@ for (var i = 0; i < items.length; i++) {
     );
   }
 }
+*/

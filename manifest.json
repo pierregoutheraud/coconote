@@ -1,8 +1,8 @@
 {
-  "name": "vim-notes-chrome-extension",
+  "name": "notes-chrome-extension",
   "version": "1.0.0",
   "manifest_version": 2,
-  "description": "Take notes with vim in your browser.",
+  "description": "Take notes in your browser new tab.",
   "icons": {
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",

@@ -1,4 +1,7 @@
 {
-  "presets": ["react", "stage-0"],
-  "plugins": ["transform-class-properties"]
+  "presets": ["@babel/preset-react"],
+  "plugins": [
+    "@babel/plugin-transform-async-to-generator",
+    "@babel/plugin-proposal-class-properties"
+  ]
 }
