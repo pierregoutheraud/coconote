@@ -16,19 +16,17 @@ export default function useEditorState() {
     dispatch => dispatch.editor.setContentStateRaw
   );
 
-  const initialEditorState = EditorState.createWithContent(
-    ContentState.createFromText(DEFAULT_TEXT)
-  );
+  // initial editor state from global state OR empty
+  let initialEditorState;
+  if (typeof contentStateRaw === "undefined") {
+    initialEditorState = EditorState.createWithContent(
+      ContentState.createFromText(DEFAULT_TEXT)
+    );
+  } else {
+    const contentState = convertFromRaw(contentStateRaw);
+    initialEditorState = EditorState.createWithContent(contentState);
+  }
 
-  // let initialEditorState;
-  // if (typeof contentStateRaw === "undefined") {
-  //   initialEditorState = EditorState.createWithContent(
-  //     ContentState.createFromText(DEFAULT_TEXT)
-  //   );
-  // } else {
-  //   const contentState = convertFromRaw(contentStateRaw);
-  //   initialEditorState = EditorState.createWithContent(contentState);
-  // }
   const [editorState, _setEditorState] = useState(initialEditorState);
 
   function setEditorState(editorState, save = true) {

@@ -38,7 +38,6 @@ export default function MyEditor() {
   };
 
   return (
-    // <div className={styles[font.split(" ").join("-")]}>
     <div
       style={fontStyle}
       className={cx(styles.container, {

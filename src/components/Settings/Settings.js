@@ -20,7 +20,7 @@ export default function Settings({ className }) {
   );
   const edit = useAction(dispatch => dispatch.settings.edit);
 
-  const fonts = Object.keys(FONTS).map(f => {
+  const fonts = FONTS.map(f => {
     return (
       <Radio
         key={f}
@@ -34,20 +34,6 @@ export default function Settings({ className }) {
         label={f}
       />
     );
-    // return (
-    //   <div className={styles.radio} key={f}>
-    //     <input
-    //       id={`id_${f}`}
-    //       type="radio"
-    //       value={f}
-    //       checked={f === font}
-    //       onChange={() => {
-    //         setFont(f);
-    //       }}
-    //     />
-    //     <label htmlFor={`id_${f}`}>{f}</label>
-    //   </div>
-    // );
   });
 
   return (

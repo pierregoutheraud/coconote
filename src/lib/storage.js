@@ -85,7 +85,7 @@ class Storage {
     });
 
     await this.set(data);
-    // console.log("saveState", data);
+    console.log("saveState", data);
   }
 }
 

@@ -1,33 +1,43 @@
 import "@babel/polyfill";
 import React from "react";
 import ReactDOM from "react-dom";
-import { StoreProvider, createStore } from "easy-peasy";
-import model from "./store/model";
+import { StoreProvider } from "easy-peasy";
 import App from "./App";
-import storage from "./lib/storage";
+import configureStore from "./store/configureStore";
 import "./index.css";
 
-async function render() {
-  const persistedState = await storage.loadState();
+async function render(force) {
+  console.log("---> render");
+  const store = await configureStore();
 
-  const store = createStore(model, {
-    initialState: persistedState,
-    devTools: true,
-  });
+  const div = document.querySelector("#root");
 
-  // We load font from store
-  store.dispatch.settings.setFont(store.getState().settings.font);
-
-  store.subscribe(async () => {
-    await storage.saveState(store.getState());
-  });
+  if (force) {
+    ReactDOM.render(null, div);
+  }
 
   ReactDOM.render(
     <StoreProvider store={store}>
       <App />
     </StoreProvider>,
-    document.querySelector("#root")
+    div
   );
 }
+
+// Re-render in case we are not the focused tab and we received new data from chrome.storage
+let tabId;
+chrome.tabs.getCurrent(tab => {
+  tabId = tab.id;
+  chrome.storage.onChanged.addListener(function(changes, namespace) {
+    chrome.tabs.query({ active: true, lastFocusedWindow: true }, function(
+      tabs
+    ) {
+      // If we are not the focused tab
+      if (tabId !== tabs[0].id) {
+        render(true);
+      }
+    });
+  });
+});
 
 render();
