@@ -7,9 +7,9 @@ class Storage {
     });
   }
 
-  set(data) {
+  set(key, value) {
     return new Promise(resolve => {
-      chrome.storage.sync.set(data, function() {
+      chrome.storage.sync.set({ [key]: value }, function() {
         resolve();
       });
     });

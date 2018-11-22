@@ -1,4 +1,42 @@
 .container {
+  position: relative;
   width: 100%;
+}
+
+.editor {
+  position: relative;
+  z-index: 2;
   background: #f6f6f6;
+
+  transition: transform 400ms;
+  /* transition: margin 500ms; */
+}
+.container.settingsOpen .editor {
+  transform: translate3d(300px, 0, 0);
+  /* margin-left: 400px; */
+}
+
+.settings {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  width: 300px;
+}
+
+.settingsButton {
+  cursor: pointer;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 3;
+  color: black;
+  border: none;
+  background: none;
+  opacity: 0.3;
+  transition: opacity 600ms;
+}
+.settingsButton:hover {
+  opacity: 1;
 }

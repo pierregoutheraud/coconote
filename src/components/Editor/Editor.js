@@ -1,14 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { useStore } from "easy-peasy";
 import { Editor, RichUtils } from "draft-js";
+
 import userEditorState from "../../hooks/useEditorState";
 import "draft-js/dist/Draft.css";
-import "./Editor.css";
+import { FONTS } from "../../constants/constants";
+import styles from "./Editor.css";
 
 export default function MyEditor() {
   const [editorState, setEditorState] = userEditorState();
+  const font = useStore(state => state.settings.font);
+  const fontSize = useStore(state => state.settings.fontSize);
 
   if (editorState === null) {
-    return <p>loading...</p>;
+    return null;
   }
 
   function onChange(e) {
@@ -30,12 +35,20 @@ export default function MyEditor() {
     },
   };
 
+  const fontStyle = {
+    fontFamily: font,
+    fontSize,
+  };
+
   return (
-    <Editor
-      editorState={editorState}
-      customStyleMap={styleMap}
-      handleKeyCommand={handleKeyCommand}
-      onChange={onChange}
-    />
+    // <div className={styles[font.split(" ").join("-")]}>
+    <div style={fontStyle}>
+      <Editor
+        editorState={editorState}
+        customStyleMap={styleMap}
+        handleKeyCommand={handleKeyCommand}
+        onChange={onChange}
+      />
+    </div>
   );
 }

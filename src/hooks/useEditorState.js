@@ -5,7 +5,7 @@ import {
   convertFromRaw,
   convertToRaw,
 } from "draft-js";
-import { defaultText } from "../constants/constants";
+import { DEFAULT_TEXT } from "../constants/constants";
 import storage from "../lib/storage";
 
 const KEY = "EDITOR_STATE_KEY";
@@ -78,7 +78,7 @@ export default function useEditorState() {
       if (!(KEY_BLOCKS_LENGTH in result)) {
         // editorState = EditorState.createEmpty();
         editorState = EditorState.createWithContent(
-          ContentState.createFromText(defaultText)
+          ContentState.createFromText(DEFAULT_TEXT)
         );
         setEditorState(editorState, false);
       } else {
