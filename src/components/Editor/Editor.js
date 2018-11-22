@@ -1,20 +1,16 @@
 import React from "react";
 import { useStore } from "easy-peasy";
-import { Editor, RichUtils } from "draft-js";
+import { Editor, RichUtils, EditorState, ContentState } from "draft-js";
 
 import userEditorState from "../../hooks/useEditorState";
 import "draft-js/dist/Draft.css";
-import { FONTS } from "../../constants/constants";
+import { FONTS, DEFAULT_TEXT } from "../../constants/constants";
 import styles from "./Editor.css";
 
 export default function MyEditor() {
   const [editorState, setEditorState] = userEditorState();
   const font = useStore(state => state.settings.font);
   const fontSize = useStore(state => state.settings.fontSize);
-
-  if (editorState === null) {
-    return null;
-  }
 
   function onChange(e) {
     return setEditorState(e);

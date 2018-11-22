@@ -1,11 +1,13 @@
 :global(.DraftEditor-root) {
   flex: 1;
-  width: 80ch;
-  margin: auto;
+  /* We could also use ch here --> width: 80ch; */
+  /* width: 50vw;  */
+  /* margin: auto; */
 }
 
 :global(.DraftEditor-editorContainer .public-DraftEditor-content) {
-  padding: 40px 20px 50vh;
+  /* padding: 40px 20px 50vh; */
+  padding: 40px 25vw 50vh 25vw;
   min-height: 100vh;
 }
 

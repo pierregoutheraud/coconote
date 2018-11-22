@@ -1,6 +1,9 @@
+import { ContentState, EditorState } from "draft-js";
+import { DEFAULT_TEXT } from "../constants/constants";
+
 export default {
   settings: {
-    open: true,
+    open: false,
     font: "Roboto Mono",
     fontSize: 16,
     edit: (state, payload) => {
@@ -20,6 +23,12 @@ export default {
     },
     smallerFontSize: state => {
       state.fontSize--;
+    },
+  },
+  editor: {
+    contentStateRaw: undefined,
+    setContentStateRaw: (state, contentStateRaw) => {
+      state.contentStateRaw = contentStateRaw;
     },
   },
 };
