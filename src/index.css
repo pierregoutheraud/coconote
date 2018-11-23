@@ -13,11 +13,9 @@ body {
 /* Display html when font loaded */
 body {
   opacity: 0;
-  /* transform: translate3d(50px, 0, 0); */
-  transition: opacity 400ms, transform 400ms;
+  transition: opacity 300ms;
 }
 :global(html.wf-active body) {
-  /* transform: translate3d(0, 0, 0); */
   opacity: 1;
 }
 
