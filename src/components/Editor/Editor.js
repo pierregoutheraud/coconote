@@ -1,11 +1,21 @@
 import React from "react";
 import { useStore } from "easy-peasy";
-import { Editor, RichUtils } from "draft-js";
+import { RichUtils } from "draft-js";
+import Editor from "draft-js-plugins-editor";
+import createLinkifyPlugin from "draft-js-linkify-plugin";
 import cx from "classnames";
 
 import userEditorState from "../../hooks/useEditorState";
 import "draft-js/dist/Draft.css";
+// import "draft-js-linkify-plugin/lib/plugin.css";
 import styles from "./Editor.css";
+
+const linkifyPlugin = createLinkifyPlugin({
+  target: "_blank",
+  component: props => (
+    <a {...props} onClick={() => window.open(props.href, "_blank")} />
+  ),
+});
 
 export default function MyEditor() {
   const [editorState, setEditorState] = userEditorState();
@@ -49,6 +59,7 @@ export default function MyEditor() {
         customStyleMap={styleMap}
         handleKeyCommand={handleKeyCommand}
         onChange={onChange}
+        plugins={[linkifyPlugin]}
       />
     </div>
   );

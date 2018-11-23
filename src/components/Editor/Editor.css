@@ -20,12 +20,14 @@
   min-height: 100vh;
 }
 
-.Roboto-Mono {
-  font-family: "Roboto Mono", sans-serif;
-  font-size: 16px;
+/* Links */
+
+:global(.draftJsLinkifyPlugin__link__2ittM),
+:global(.draftJsLinkifyPlugin__link__2ittM:visited) {
+  cursor: pointer;
+  color: goldenrod;
 }
 
-.Karla {
-  font-family: "Karla", sans-serif;
-  font-size: 18px;
+:global(.draftJsLinkifyPlugin__link__2ittM:hover) {
+  color: goldenrod;
 }
