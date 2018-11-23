@@ -35,11 +35,8 @@ export default function useEditorState() {
 
   const [editorState, _setEditorState] = useState(initialEditorState);
 
-  function setEditorState(editorState, save = true) {
+  function setEditorState(editorState) {
     _setEditorState(editorState);
-    if (!save) {
-      return;
-    }
 
     // Save contentState to global state
     clearTimeout(timeout);
