@@ -1,10 +1,3 @@
-import {
-  ContentState,
-  EditorState,
-  convertFromRaw,
-  convertToRaw,
-} from "draft-js";
-
 const KEY_STATE = "STATE";
 
 const KEY_EDITOR = "EDITOR_STATE_RAW";
@@ -85,7 +78,7 @@ class Storage {
     });
 
     await this.set(data);
-    console.log("saveState", data);
+    // console.log("saveState", data);
   }
 }
 

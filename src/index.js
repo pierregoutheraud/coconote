@@ -7,7 +7,6 @@ import configureStore from "./store/configureStore";
 import "./index.css";
 
 async function render(force) {
-  console.log("---> render");
   const store = await configureStore();
 
   const div = document.querySelector("#root");
