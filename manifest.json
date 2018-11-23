@@ -1,5 +1,5 @@
 {
-  "name": "notes-browser-extension",
+  "name": "coconote",
   "version": "1.0.0",
   "manifest_version": 2,
   "description": "Take notes in your browser new tab.",

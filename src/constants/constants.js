@@ -154,7 +154,6 @@ Made with ❤️ by http://pierregoutheraud.fr
 
 export const FONTS = [
   "Roboto Mono",
-  "Noto Sans SC",
   "Karla",
   "Libre Baskerville",
 ];
