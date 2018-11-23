@@ -12,6 +12,7 @@ export default function SettingsButton() {
     <button
       className={cx(styles.settingsButton, {
         [styles.nightmode]: nightmode,
+        [styles.settingsOpen]: settingsOpen,
       })}
       onClick={toggleSettings}
     >

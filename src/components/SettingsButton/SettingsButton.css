@@ -9,10 +9,15 @@
   background: none;
   opacity: 0.3;
   transition: opacity 600ms;
+  transition: transform 400ms;
+  transform: translate3d(0, 0, 0);
 }
 .settingsButton:hover {
   opacity: 1;
 }
 .nightmode.settingsButton {
   color: white;
+}
+.settingsOpen.settingsButton {
+  transform: translate3d(300px, 0, 0);
 }

@@ -18,9 +18,9 @@ export default function App() {
         [styles.nightmode]: nightmode,
       })}
     >
+      <SettingsButton />
       <Settings className={styles.settings} />
       <section className={styles.editor}>
-        <SettingsButton />
         <Editor />
       </section>
     </div>
