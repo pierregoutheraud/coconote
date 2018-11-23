@@ -6,7 +6,10 @@ import {
   convertFromRaw,
   convertToRaw,
 } from "draft-js";
-import { DEFAULT_TEXT } from "../constants/constants";
+import {
+  DEFAULT_TEXT,
+  DEFAULT_CONTENT_STATE_RAW,
+} from "../constants/constants";
 
 let timeout = null;
 
@@ -19,8 +22,11 @@ export default function useEditorState() {
   // initial editor state from global state OR empty
   let initialEditorState;
   if (typeof contentStateRaw === "undefined") {
+    // initialEditorState = EditorState.createWithContent(
+    //   ContentState.createFromText(DEFAULT_TEXT)
+    // );
     initialEditorState = EditorState.createWithContent(
-      ContentState.createFromText(DEFAULT_TEXT)
+      convertFromRaw(DEFAULT_CONTENT_STATE_RAW)
     );
   } else {
     const contentState = convertFromRaw(contentStateRaw);
