@@ -1,0 +1,16 @@
+{
+  "name": "coconote",
+  "version": "1.0.0",
+  "manifest_version": 2,
+  "description": "Take notes in your browser new tab.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "chrome_url_overrides": {
+    "newtab": "index.html"
+  },
+  "permissions": ["storage"],
+  "content_security_policy": "default-src 'self'; script-src 'self' 'unsafe-eval' https://ajax.googleapis.com/; connect-src ws://localhost:63168/; font-src *; style-src *;"
+}
