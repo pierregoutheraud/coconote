@@ -1,11 +1,10 @@
 {
   "name": "notes-chrome-extension",
   "version": "1.0.0",
-  "main": "index.js",
   "license": "MIT",
   "scripts": {
     "start": "parcel watch src/index.html --public-url=\"./\" --hmr-hostname localhost --hmr-port 63168",
-    "build": "parcel build src/index.html --public-url=\"./\""
+    "build": "parcel build src/index.html --public-url=\"./\" --no-source-maps"
   },
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
