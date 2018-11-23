@@ -3,11 +3,12 @@
   --red: #cd0d23;
 }
 
-html,
-body {
-  box-sizing: border-box;
-  min-height: 100%;
+html {
   background: #f6f6f6;
+  box-sizing: border-box;
+}
+body {
+  min-height: 100%;
 }
 
 /* Display html when font loaded */
