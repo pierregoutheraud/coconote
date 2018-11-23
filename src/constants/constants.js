@@ -13,4 +13,10 @@ Made with ❤️ by http://pierregoutheraud.fr
 
 export const DEFAULT_TEXT = `Write anything here.`;
 
-export const FONTS = ["Roboto Mono", "Karla", "Libre Baskerville"];
+export const FONTS = [
+  "Roboto Mono",
+  "Noto Sans SC",
+  "Karla",
+  "Libre Baskerville",
+  "Patrick Hand",
+];
