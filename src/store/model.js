@@ -1,7 +1,9 @@
+import { FONTS } from "../constants/constants";
+
 export default {
   settings: {
     open: false,
-    font: "Roboto Mono",
+    font: FONTS[0],
     fontSize: 16,
     nightmode: false,
     edit: (state, payload) => {
