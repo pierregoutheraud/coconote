@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useStore, useAction } from "easy-peasy";
 import {
   ContentState,
@@ -19,21 +19,26 @@ export default function useEditorState() {
     dispatch => dispatch.editor.setContentStateRaw
   );
 
-  // initial editor state from global state OR empty
-  let initialEditorState;
-  if (typeof contentStateRaw === "undefined") {
-    // initialEditorState = EditorState.createWithContent(
-    //   ContentState.createFromText(DEFAULT_TEXT)
-    // );
-    initialEditorState = EditorState.createWithContent(
-      convertFromRaw(DEFAULT_CONTENT_STATE_RAW)
-    );
-  } else {
-    const contentState = convertFromRaw(contentStateRaw);
-    initialEditorState = EditorState.createWithContent(contentState);
-  }
+  const [editorState, _setEditorState] = useState(null);
 
-  const [editorState, _setEditorState] = useState(initialEditorState);
+  // Initial state from global state
+  useEffect(() => {
+    // initial editor state from global state OR empty
+    let initialEditorState;
+    if (typeof contentStateRaw === "undefined") {
+      // initialEditorState = EditorState.createWithContent(
+      //   ContentState.createFromText(DEFAULT_TEXT)
+      // );
+      initialEditorState = EditorState.createWithContent(
+        convertFromRaw(DEFAULT_CONTENT_STATE_RAW)
+      );
+    } else {
+      const contentState = convertFromRaw(contentStateRaw);
+      initialEditorState = EditorState.createWithContent(contentState);
+    }
+
+    _setEditorState(initialEditorState);
+  }, []);
 
   function setEditorState(editorState) {
     _setEditorState(editorState);

@@ -23,6 +23,10 @@ export default function MyEditor() {
   const fontSize = useStore(state => state.settings.fontSize);
   const nightmode = useStore(state => state.settings.nightmode);
 
+  if (editorState === null) {
+    return null;
+  }
+
   function onChange(e) {
     return setEditorState(e);
   }
