@@ -18,18 +18,8 @@ export const DEFAULT_CONTENT_STATE_RAW = {
       data: {},
     },
     {
-      key: "2dcf",
-      text: "",
-      type: "unstyled",
-      depth: 0,
-      inlineStyleRanges: [],
-      entityRanges: [],
-      data: {},
-    },
-    {
       key: "6li6p",
-      text:
-        "Your thoughts are automatically saved up and synched on all your Chrome instances.",
+      text: "Everything is saved up and synched on all your devices.",
       type: "unstyled",
       depth: 0,
       inlineStyleRanges: [],
@@ -152,8 +142,4 @@ Some shortcuts for you:
 Made with ❤️ by http://pierregoutheraud.fr
 `;
 
-export const FONTS = [
-  "Roboto Mono",
-  "Karla",
-  "Libre Baskerville",
-];
+export const FONTS = ["Roboto Mono", "Karla", "Libre Baskerville"];
