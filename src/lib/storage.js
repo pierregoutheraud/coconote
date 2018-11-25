@@ -1,16 +1,11 @@
 import { rejects } from "assert";
-
-const KEY_STATE = "STATE";
-
-const KEY_EDITOR = "EDITOR_STATE_RAW";
-const KEY_EDITOR_REST = KEY_EDITOR + "_REST";
-const KEY_EDITOR_BLOCKS_LENGTH = KEY_EDITOR + "_BLOCKS_LENGTH";
-const KEY_EDITOR_BLOCK = KEY_EDITOR + "_BLOCK_";
+// Allows to store large object in chrome.storage.sync, by compressing and splitting in different keys
+import "chrome-storage-largesync/dist/chrome-Storage-largeSync.min.js";
 
 class Storage {
-  get(keys) {
+  get(keys = null) {
     return new Promise(resolve => {
-      chrome.storage.sync.get(keys, function(result) {
+      chrome.storage.largeSync.get(keys, function(result) {
         resolve(result);
       });
     });
@@ -18,7 +13,7 @@ class Storage {
 
   set(obj) {
     return new Promise(resolve => {
-      chrome.storage.sync.set(obj, function() {
+      chrome.storage.largeSync.set(obj, function() {
         if (chrome.runtime.lastError) {
           console.error(chrome.runtime.lastError.message);
           rejects(chrome.runtime.lastError);
@@ -28,7 +23,7 @@ class Storage {
     });
   }
 
-  clear(obj) {
+  clear() {
     return new Promise(resolve => {
       chrome.storage.sync.clear(function() {
         if (chrome.runtime.lastError) {
@@ -41,55 +36,12 @@ class Storage {
   }
 
   async loadState() {
-    // First we check if we have a state in chrome storage
-    const res1 = await this.get([KEY_EDITOR_BLOCKS_LENGTH]);
-    if (!(KEY_EDITOR_BLOCKS_LENGTH in res1)) {
-      return undefined;
-    }
-
-    // We fetch the number of lines saved in editor
-    const blocksLength = res1[KEY_EDITOR_BLOCKS_LENGTH];
-
-    // Get all storage obj
-    const res2 = await this.get(null);
-
-    // Reconstruct contentStateRaw and global state
-    const blocks = [...Array(blocksLength)].map(
-      (v, i) => res2[KEY_EDITOR_BLOCK + i]
-    );
-    const rest = res2[KEY_EDITOR_REST];
-    const contentStateRaw = { blocks, ...rest };
-
-    let state = {
-      ...(res2[KEY_STATE] || {}),
-      editor: {
-        contentStateRaw,
-      },
-    };
-
-    return state;
+    return await this.get();
   }
 
   async saveState(state) {
-    // Save everything except editor
-    const { editor, ...restOfState } = state;
-    let data = { [KEY_STATE]: restOfState };
-
-    // We need to split up contentStateRaw into multiple indexes
-    const { blocks, ...restOfEditor } = editor.contentStateRaw;
-
-    // First save ...rest
-    data[KEY_EDITOR_REST] = restOfEditor;
-
-    // Then one key for each blocks
-    data[KEY_EDITOR_BLOCKS_LENGTH] = blocks.length;
-    blocks.forEach((block, i) => {
-      data[KEY_EDITOR_BLOCK + i] = block;
-    });
-
     // await this.clear(); // optional
-    await this.set(data);
-    // console.log("saveState", data);
+    await this.set(state);
   }
 }
 

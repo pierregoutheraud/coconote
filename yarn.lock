@@ -370,6 +370,11 @@ chalk@^2.0.0, chalk@^2.4.1:
     escape-string-regexp "^1.0.5"
     supports-color "^5.3.0"
 
+chrome-storage-largesync@^0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/chrome-storage-largesync/-/chrome-storage-largesync-0.0.4.tgz#b3cb5c1288af5681edc162767a806547aad309db"
+  integrity sha1-s8tcEoivVoHtwWJ2eoBlR6rTCds=
+
 classnames@^2.2.6:
   version "2.2.6"
   resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.6.tgz#43935bffdd291f326dad0a205309b38d00f650ce"

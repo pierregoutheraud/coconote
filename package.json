@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
+    "chrome-storage-largesync": "^0.0.4",
     "classnames": "^2.2.6",
     "draft-js": "^0.10.5",
     "draft-js-linkify-plugin": "^2.0.1",
