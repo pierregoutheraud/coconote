@@ -28,7 +28,14 @@ export default function MyEditor() {
   }
 
   function onChange(e) {
-    return setEditorState(e);
+    setEditorState(e);
+  }
+
+  function checkMaxLines() {
+    const numberOfLines = editorState.getCurrentContent().getBlockMap().size;
+    if (numberOfLines > 500) {
+      return "handled";
+    }
   }
 
   function handleKeyCommand(command, editorState) {
@@ -64,6 +71,8 @@ export default function MyEditor() {
         handleKeyCommand={handleKeyCommand}
         onChange={onChange}
         plugins={[linkifyPlugin]}
+        handleBeforeInput={checkMaxLines}
+        handlePastedText={checkMaxLines}
       />
     </div>
   );
