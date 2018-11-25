@@ -1,3 +1,4 @@
+import { select } from "easy-peasy";
 import { FONTS } from "../constants/constants";
 
 export default {
@@ -25,10 +26,12 @@ export default {
       state.fontSize--;
     },
   },
-  editor: {
-    contentStateRaw: undefined,
-    setContentStateRaw: (state, contentStateRaw) => {
-      state.contentStateRaw = contentStateRaw;
+  notes: {
+    currentIndex: 0,
+    list: [],
+    setCurrentNote: (state, contentStateRaw) => {
+      state.list[state.currentIndex] = contentStateRaw;
     },
+    currentNote: select(state => state.list[state.currentIndex]),
   },
 };

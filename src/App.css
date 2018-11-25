@@ -15,15 +15,29 @@
   box-shadow: 0 0 60px 0 rgba(0, 0, 0, 0.2);
 }
 .container.settingsOpen .editor {
-  transform: translate3d(300px, 0, 0);
+  transform: translate3d(-300px, 0, 0);
   /* margin-left: 400px; */
+}
+
+.settingsButton {
+  right: 20px;
+}
+.settingsButtonActive {
+  transform: translate3d(-300px, 0, 0);
+}
+
+.menuButton {
+  left: 20px;
+}
+.menuButtonActive {
+  transform: translate3d(300px, 0, 0);
 }
 
 .settings {
   position: fixed;
   top: 0;
   bottom: 0;
-  left: 0;
+  right: 0;
   z-index: 1;
   width: 300px;
 }

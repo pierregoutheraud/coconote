@@ -2,14 +2,12 @@
   cursor: pointer;
   position: fixed;
   top: 20px;
-  left: 20px;
   z-index: 3;
   color: black;
   border: none;
   background: none;
   opacity: 0.3;
-  transition: opacity 600ms;
-  transition: transform 400ms;
+  transition: transform 400ms, opacity 600ms;
   transform: translate3d(0, 0, 0);
 }
 .settingsButton:hover {
@@ -17,7 +15,4 @@
 }
 .nightmode.settingsButton {
   color: white;
-}
-.settingsOpen.settingsButton {
-  transform: translate3d(300px, 0, 0);
 }

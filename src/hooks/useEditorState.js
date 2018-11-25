@@ -14,10 +14,8 @@ import {
 let timeout = null;
 
 export default function useEditorState() {
-  const contentStateRaw = useStore(state => state.editor.contentStateRaw);
-  const setContentStateRaw = useAction(
-    dispatch => dispatch.editor.setContentStateRaw
-  );
+  const currentNote = useStore(state => state.notes.currentNote);
+  const setCurrentNote = useAction(dispatch => dispatch.notes.setCurrentNote);
 
   const [editorState, _setEditorState] = useState(null);
 
@@ -25,7 +23,7 @@ export default function useEditorState() {
   useEffect(() => {
     // initial editor state from global state OR empty
     let initialEditorState;
-    if (typeof contentStateRaw === "undefined") {
+    if (!currentNote) {
       // initialEditorState = EditorState.createWithContent(
       //   ContentState.createFromText(DEFAULT_TEXT)
       // );
@@ -33,7 +31,7 @@ export default function useEditorState() {
         convertFromRaw(DEFAULT_CONTENT_STATE_RAW)
       );
     } else {
-      const contentState = convertFromRaw(contentStateRaw);
+      const contentState = convertFromRaw(currentNote);
       initialEditorState = EditorState.createWithContent(contentState);
     }
 
@@ -48,7 +46,7 @@ export default function useEditorState() {
     timeout = setTimeout(() => {
       const contentState = editorState.getCurrentContent();
       const contentStateRaw = convertToRaw(contentState);
-      setContentStateRaw(contentStateRaw);
+      setCurrentNote(contentStateRaw);
     }, 300);
   }
 
