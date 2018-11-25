@@ -39,6 +39,11 @@ export default {
         title: "Note 1",
         content: undefined,
       },
+      {
+        id: uuidv4(),
+        title: "Note 2",
+        content: null,
+      },
     ],
     deleteCurrent: state => {
       const oldIndex = state.currentIndex;
