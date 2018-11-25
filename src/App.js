@@ -1,5 +1,5 @@
 import React from "react";
-import { useStore, useAction } from "easy-peasy";
+import { useStore } from "easy-peasy";
 import cx from "classnames";
 
 import Editor from "./components/Editor/Editor";
