@@ -1,3 +1,5 @@
+import { rejects } from "assert";
+
 const KEY_STATE = "STATE";
 
 const KEY_EDITOR = "EDITOR_STATE_RAW";
@@ -16,9 +18,22 @@ class Storage {
 
   set(obj) {
     return new Promise(resolve => {
-      chrome.storage.sync.set(obj, function(e) {
+      chrome.storage.sync.set(obj, function() {
         if (chrome.runtime.lastError) {
           console.error(chrome.runtime.lastError.message);
+          rejects(chrome.runtime.lastError);
+        }
+        resolve();
+      });
+    });
+  }
+
+  clear(obj) {
+    return new Promise(resolve => {
+      chrome.storage.sync.clear(function() {
+        if (chrome.runtime.lastError) {
+          console.error(chrome.runtime.lastError.message);
+          rejects(chrome.runtime.lastError);
         }
         resolve();
       });
@@ -35,16 +50,8 @@ class Storage {
     // We fetch the number of lines saved in editor
     const blocksLength = res1[KEY_EDITOR_BLOCKS_LENGTH];
 
-    // Create array of keys that we are going to get from chrome.storage
-    const keys = [...Array(blocksLength)].reduce(
-      (acc, curr, i) => {
-        acc.push(KEY_EDITOR_BLOCK + i);
-        return acc;
-      },
-      [KEY_STATE, KEY_EDITOR_REST]
-    );
-
-    const res2 = await this.get(keys);
+    // Get all storage obj
+    const res2 = await this.get(null);
 
     // Reconstruct contentStateRaw and global state
     const blocks = [...Array(blocksLength)].map(
@@ -80,6 +87,7 @@ class Storage {
       data[KEY_EDITOR_BLOCK + i] = block;
     });
 
+    // await this.clear(); // optional
     await this.set(data);
     // console.log("saveState", data);
   }
