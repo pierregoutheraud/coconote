@@ -23,10 +23,6 @@ export default function MyEditor() {
   const fontSize = useStore(state => state.settings.fontSize);
   const nightmode = useStore(state => state.settings.nightmode);
 
-  if (editorState === null) {
-    return null;
-  }
-
   function onChange(e) {
     setEditorState(e);
   }
@@ -58,13 +54,15 @@ export default function MyEditor() {
         [styles.nightmode]: nightmode,
       })}
     >
-      <Editor
-        editorState={editorState}
-        customStyleMap={styleMap}
-        handleKeyCommand={handleKeyCommand}
-        onChange={onChange}
-        plugins={[linkifyPlugin]}
-      />
+      {editorState !== null && (
+        <Editor
+          editorState={editorState}
+          customStyleMap={styleMap}
+          handleKeyCommand={handleKeyCommand}
+          onChange={onChange}
+          plugins={[linkifyPlugin]}
+        />
+      )}
     </div>
   );
 }
