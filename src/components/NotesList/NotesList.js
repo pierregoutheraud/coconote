@@ -52,9 +52,10 @@ export default function NotesList({ className }) {
         {list.length < 30 && (
           <Icon
             className={cx(styles.icon, styles.add)}
-            size={32}
+            size={28}
             name="add"
             onClick={createNote}
+            title="Add a note"
           />
         )}
         {list.length > 1 && (
@@ -62,7 +63,8 @@ export default function NotesList({ className }) {
             className={cx(styles.icon, styles.remove)}
             onClick={handleClickDelete}
             name="delete_forever"
-            size={28}
+            size={26}
+            title="Delete current note"
           />
         )}
       </div>
