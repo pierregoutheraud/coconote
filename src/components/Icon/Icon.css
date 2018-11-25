@@ -1,0 +1,17 @@
+.container {
+  opacity: 0.7;
+  transition: 500ms opacity;
+}
+
+button.container {
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+.container:hover {
+  opacity: 1 !important;
+}
+
+.icon {
+}

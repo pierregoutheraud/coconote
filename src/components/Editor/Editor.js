@@ -5,7 +5,7 @@ import Editor from "draft-js-plugins-editor";
 import createLinkifyPlugin from "draft-js-linkify-plugin";
 import cx from "classnames";
 
-import userEditorState from "../../hooks/useEditorState";
+import useNote from "../../hooks/useNote";
 import "draft-js/dist/Draft.css";
 // import "draft-js-linkify-plugin/lib/plugin.css";
 import styles from "./Editor.css";
@@ -18,7 +18,7 @@ const linkifyPlugin = createLinkifyPlugin({
 });
 
 export default function MyEditor() {
-  const [editorState, setEditorState] = userEditorState();
+  const [editorState, setEditorState] = useNote();
   const font = useStore(state => state.settings.font);
   const fontSize = useStore(state => state.settings.fontSize);
   const nightmode = useStore(state => state.settings.nightmode);

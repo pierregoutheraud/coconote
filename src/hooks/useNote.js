@@ -13,30 +13,37 @@ import {
 
 let timeout = null;
 
-export default function useEditorState() {
+export default function useNote() {
   const currentNote = useStore(state => state.notes.currentNote);
   const setCurrentNote = useAction(dispatch => dispatch.notes.setCurrentNote);
 
   const [editorState, _setEditorState] = useState(null);
 
   // Initial state from global state
-  useEffect(() => {
-    // initial editor state from global state OR empty
-    let initialEditorState;
-    if (!currentNote) {
-      // initialEditorState = EditorState.createWithContent(
-      //   ContentState.createFromText(DEFAULT_TEXT)
-      // );
-      initialEditorState = EditorState.createWithContent(
-        convertFromRaw(DEFAULT_CONTENT_STATE_RAW)
-      );
-    } else {
-      const contentState = convertFromRaw(currentNote);
-      initialEditorState = EditorState.createWithContent(contentState);
-    }
+  useEffect(
+    () => {
+      // initial editor state from global state OR empty
+      let initialEditorState;
+      if (!currentNote.content) {
+        if (currentNote.content === null) {
+          initialEditorState = EditorState.createEmpty();
+          // initialEditorState = EditorState.createWithContent(
+          //   ContentState.createFromText("Your new note here.")
+          // );
+        } else {
+          initialEditorState = EditorState.createWithContent(
+            convertFromRaw(DEFAULT_CONTENT_STATE_RAW)
+          );
+        }
+      } else {
+        const contentState = convertFromRaw(currentNote.content);
+        initialEditorState = EditorState.createWithContent(contentState);
+      }
 
-    _setEditorState(initialEditorState);
-  }, []);
+      _setEditorState(initialEditorState);
+    },
+    [currentNote.id]
+  );
 
   function setEditorState(editorState) {
     _setEditorState(editorState);
