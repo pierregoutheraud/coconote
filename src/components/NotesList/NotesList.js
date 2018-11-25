@@ -27,7 +27,6 @@ export default function NotesList({ className }) {
   }
 
   const _list = list.map(note => {
-    const { title } = note;
     return (
       <button
         key={note.id}
