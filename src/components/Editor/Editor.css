@@ -27,9 +27,9 @@
 :global(.draftJsLinkifyPlugin__link__2ittM),
 :global(.draftJsLinkifyPlugin__link__2ittM:visited) {
   cursor: pointer;
-  color: goldenrod;
+  color: var(--main);
 }
 
 :global(.draftJsLinkifyPlugin__link__2ittM:hover) {
-  color: goldenrod;
+  color: var(--main);
 }

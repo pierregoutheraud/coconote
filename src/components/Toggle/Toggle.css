@@ -22,7 +22,7 @@
 
 .active .btn {
   transform: translateX(22px);
-  background: goldenrod;
+  background: var(--main);
 }
 
 .active.body {

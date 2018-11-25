@@ -28,7 +28,7 @@
   content: "";
   width: 10px;
   height: 10px;
-  background: goldenrod;
+  background: var(--main);
   position: absolute;
   left: 3px;
   border-radius: 100%;
