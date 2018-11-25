@@ -3,6 +3,7 @@
   flex-direction: column;
   align-items: center;
   background: rgba(20, 20, 20, 1);
+  padding-top: 30px;
 }
 
 .notes {

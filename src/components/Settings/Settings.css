@@ -1,5 +1,6 @@
 .container {
   background: rgba(20, 20, 20, 1);
+  padding-top: 10px;
 }
 
 .fieldset {
