@@ -16,7 +16,10 @@ class Storage {
 
   set(obj) {
     return new Promise(resolve => {
-      chrome.storage.sync.set(obj, function() {
+      chrome.storage.sync.set(obj, function(e) {
+        if (chrome.runtime.lastError) {
+          console.error(chrome.runtime.lastError.message);
+        }
         resolve();
       });
     });
