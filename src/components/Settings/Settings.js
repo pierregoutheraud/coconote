@@ -43,11 +43,11 @@ export default function Settings({ className }) {
       })}
     >
       <fieldset className={cx(styles.fieldset, styles.font)}>
-        <h3>Font Family</h3>
+        <h3>Font family</h3>
         <div className={styles.choices}>{fonts}</div>
       </fieldset>
       <fieldset className={cx(styles.fieldset, styles.fontSize)}>
-        <h3>Font Size</h3>
+        <h3>Font size</h3>
         <div className={styles.choices}>
           <button onClick={smallerFontSize}>
             <i className="material-icons">remove</i>
