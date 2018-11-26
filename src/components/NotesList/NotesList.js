@@ -19,7 +19,9 @@ export default function NotesList({ className }) {
   }
 
   function handleClickDelete() {
-    const res = window.confirm("Are you sure you want to remove this note ?");
+    const res = window.confirm(
+      "Are you sure you want to remove the current note ?"
+    );
     if (!res) {
       return;
     }
@@ -48,6 +50,15 @@ export default function NotesList({ className }) {
     <aside className={cx(styles.container, className)}>
       <div className={styles.notes}>{_list}</div>
       <div className={styles.buttons}>
+        {list.length > 1 && (
+          <Icon
+            className={cx(styles.icon, styles.remove)}
+            onClick={handleClickDelete}
+            name="remove"
+            size={28}
+            title="Remove note"
+          />
+        )}
         {list.length < 30 && (
           <Icon
             className={cx(styles.icon, styles.add)}
@@ -55,15 +66,6 @@ export default function NotesList({ className }) {
             name="add"
             onClick={createNote}
             title="Add a note"
-          />
-        )}
-        {list.length > 1 && (
-          <Icon
-            className={cx(styles.icon, styles.remove)}
-            onClick={handleClickDelete}
-            name="delete_forever"
-            size={26}
-            title="Delete current note"
           />
         )}
       </div>
