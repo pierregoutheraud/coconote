@@ -7,7 +7,6 @@ export default async function() {
 
   const store = createStore(model, {
     initialState: persistedState,
-    devTools: true,
   });
 
   // We load font from store
