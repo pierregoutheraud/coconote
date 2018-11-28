@@ -9,6 +9,7 @@ html {
 html,
 body {
   min-height: 100%;
+  font-family: "Roboto Mono", monospace;
 }
 
 /* Display html when font loaded */

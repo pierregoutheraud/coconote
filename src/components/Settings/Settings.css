@@ -5,6 +5,7 @@
 
 .fieldset {
   display: flex;
+  flex-direction: column;
   color: white;
   border: none;
   border-bottom: 1px solid rgba(255, 255, 255, 0.15);
@@ -17,7 +18,8 @@
 }
 
 .fieldset h3 {
-  font-size: 20px;
+  font-size: 18px;
+  font-weight: 700;
   margin-bottom: 20px;
 }
 

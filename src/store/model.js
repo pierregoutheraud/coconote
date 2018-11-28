@@ -16,12 +16,17 @@ export default {
       state.open = false;
     },
     setFont: (state, font) => {
+      state.font = font;
+
+      if (font === "Roboto Mono") {
+        return document.documentElement.classList.add("wf-active");
+      }
+
       window.WebFont.load({
         google: {
           families: [font],
         },
       });
-      state.font = font;
     },
     biggerFontSize: state => {
       state.fontSize++;
