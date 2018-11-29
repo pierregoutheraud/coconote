@@ -22,10 +22,14 @@ export default function MyEditor() {
   const font = useStore(state => state.settings.font);
   const fontSize = useStore(state => state.settings.fontSize);
   const nightmode = useStore(state => state.settings.nightmode);
+  const listOpen = useStore(state => state.notes.listOpen);
   const closeList = useAction(dispatch => dispatch.notes.closeList);
 
-  function onChange(e) {
-    setEditorState(e);
+  function onChange(newEditorState) {
+    // https://github.com/facebook/draft-js/issues/1060
+    const contentHasChanged =
+      editorState.getCurrentContent() !== newEditorState.getCurrentContent();
+    setEditorState(newEditorState, contentHasChanged);
   }
 
   function handleKeyCommand(command, editorState) {
@@ -35,6 +39,12 @@ export default function MyEditor() {
       return "handled";
     }
     return "not-handled";
+  }
+
+  function handleFocus() {
+    if (listOpen) {
+      closeList();
+    }
   }
 
   const styleMap = {
@@ -61,7 +71,7 @@ export default function MyEditor() {
           customStyleMap={styleMap}
           handleKeyCommand={handleKeyCommand}
           onChange={onChange}
-          onFocus={closeList}
+          onFocus={handleFocus}
           plugins={[linkifyPlugin]}
         />
       )}

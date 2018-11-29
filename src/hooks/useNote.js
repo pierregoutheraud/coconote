@@ -16,7 +16,6 @@ let timeout = null;
 export default function useNote() {
   const currentNote = useStore(state => state.notes.currentNote);
   const setCurrentNote = useAction(dispatch => dispatch.notes.setCurrentNote);
-
   const [editorState, _setEditorState] = useState(null);
 
   // Initial state from global state
@@ -45,8 +44,12 @@ export default function useNote() {
     [currentNote.id]
   );
 
-  function setEditorState(editorState) {
+  function setEditorState(editorState, contentHasChanged) {
     _setEditorState(editorState);
+
+    if (!contentHasChanged) {
+      return;
+    }
 
     // Save contentState to global state
     clearTimeout(timeout);

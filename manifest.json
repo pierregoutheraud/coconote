@@ -11,6 +11,11 @@
   "chrome_url_overrides": {
     "newtab": "dist/index.html"
   },
+  "applications": {
+    "gecko": {
+      "id": "dev@coconote.com"
+    }
+  },
   "permissions": ["storage"],
   "content_security_policy": "default-src 'self'; script-src 'self' 'unsafe-eval' https://ajax.googleapis.com/; connect-src ws://localhost:63168/; font-src *; style-src *;"
 }
