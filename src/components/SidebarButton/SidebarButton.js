@@ -8,9 +8,14 @@ export default function SidebarButton({
   classNameActive,
   defaultIcon,
   isActive,
+  isHidden,
   onClick,
 }) {
   const nightmode = useStore(state => state.settings.nightmode);
+
+  if (isHidden) {
+    return null;
+  }
 
   return (
     <button

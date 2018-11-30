@@ -41,6 +41,7 @@ export default function App() {
         classNameActive={styles.settingsButtonActive}
         defaultIcon="more_vert"
         isActive={settingsOpen}
+        isHidden={listOpen}
         onClick={toggleSettings}
       />
       <Settings className={styles.settings} />
@@ -49,6 +50,7 @@ export default function App() {
         classNameActive={styles.menuButtonActive}
         defaultIcon="menu"
         isActive={listOpen}
+        isHidden={settingsOpen}
         onClick={openList}
       />
       <NotesList className={styles.notesList} />
