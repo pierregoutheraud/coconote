@@ -49,13 +49,13 @@ class Storage {
     return state;
   }
 
-  async saveState(state) {
-    let str = JSON.stringify(state);
+  compressObject(obj) {
+    let str = JSON.stringify(obj);
     str = LZString.compressToBase64(str);
     let arr = str.split("");
+    const newObj = {};
 
-    let totalBytesUsed = 0;
-    const obj = {};
+    // let totalBytesUsed = 0;
     let i = 0;
     while (arr.length) {
       const key = "STATE_" + i;
@@ -63,11 +63,16 @@ class Storage {
         0,
         QUOTA_BYTES_PER_ITEM - key.length - 2 // we deduct key.length and two "
       );
-      obj[key] = segment.join("");
-      totalBytesUsed += obj[key].length + key.length + 2;
+      newObj[key] = segment.join("");
+      // totalBytesUsed += newObj[key].length + key.length + 2;
       i++;
     }
 
+    return newObj;
+  }
+
+  async saveState(state) {
+    const obj = this.compressObject(state);
     await this.clear();
     await this.set(obj);
   }
