@@ -4,7 +4,7 @@
   color: white;
   width: 100%;
   text-align: left;
-  transition: background 300ms;
+  /* transition: background 300ms, transform 300ms; */
   padding: 20px 15px;
   cursor: pointer;
 }
@@ -37,4 +37,5 @@
 .handle {
   margin-right: 15px;
   cursor: move;
+  color: rgba(255, 255, 255, 0.4);
 }

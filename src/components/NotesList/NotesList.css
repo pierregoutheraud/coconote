@@ -29,4 +29,5 @@
 
 .sortableHelper {
   z-index: 99;
+  /* transition: transform 0ms !important; */
 }

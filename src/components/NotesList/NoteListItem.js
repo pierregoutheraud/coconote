@@ -28,9 +28,7 @@ export default function NotesListItem({
       onClick={onClick}
     >
       <DragHandle />
-      <button>
-        <input type="text" defaultValue={note.title} onChange={onChange} />
-      </button>
+      <input type="text" defaultValue={note.title} onChange={onChange} />
     </li>
   );
 }
