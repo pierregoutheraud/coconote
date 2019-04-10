@@ -1,5 +1,5 @@
 import React from "react";
-import { useStore, useAction } from "easy-peasy";
+import { useStore, useActions } from "easy-peasy";
 import cx from "classnames";
 
 import styles from "./Settings.css";
@@ -11,14 +11,14 @@ export default function Settings({ className }) {
   const font = useStore(state => state.settings.font);
   const fontSize = useStore(state => state.settings.fontSize);
   const nightmode = useStore(state => state.settings.nightmode);
-  const setFont = useAction(dispatch => dispatch.settings.setFont);
-  const smallerFontSize = useAction(
+  const setFont = useActions(dispatch => dispatch.settings.setFont);
+  const smallerFontSize = useActions(
     dispatch => dispatch.settings.smallerFontSize
   );
-  const biggerFontSize = useAction(
+  const biggerFontSize = useActions(
     dispatch => dispatch.settings.biggerFontSize
   );
-  const edit = useAction(dispatch => dispatch.settings.edit);
+  const edit = useActions(dispatch => dispatch.settings.edit);
 
   const fonts = FONTS.map(f => {
     return (

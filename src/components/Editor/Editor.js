@@ -1,5 +1,5 @@
 import React from "react";
-import { useStore, useAction } from "easy-peasy";
+import { useStore, useActions } from "easy-peasy";
 import { RichUtils } from "draft-js";
 import Editor from "draft-js-plugins-editor";
 import createLinkifyPlugin from "draft-js-linkify-plugin";
@@ -23,7 +23,7 @@ export default function MyEditor() {
   const fontSize = useStore(state => state.settings.fontSize);
   const nightmode = useStore(state => state.settings.nightmode);
   const listOpen = useStore(state => state.notes.listOpen);
-  const closeList = useAction(dispatch => dispatch.notes.closeList);
+  const closeList = useActions(dispatch => dispatch.notes.closeList);
 
   function onChange(newEditorState) {
     // https://github.com/facebook/draft-js/issues/1060

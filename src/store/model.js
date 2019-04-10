@@ -1,4 +1,4 @@
-import { select } from "easy-peasy";
+import { select, action } from "easy-peasy";
 import uuidv4 from "uuid/v4";
 import { FONTS } from "../constants/constants";
 
@@ -8,14 +8,14 @@ export default {
     font: FONTS[0],
     fontSize: 16,
     nightmode: false,
-    edit: (state, payload) => {
+    edit: action((state, payload) => {
       const { field, value } = payload;
       state[field] = value;
-    },
-    closeSettings: state => {
+    }),
+    closeSettings: action(state => {
       state.open = false;
-    },
-    setFont: (state, font) => {
+    }),
+    setFont: action((state, font) => {
       state.font = font;
 
       // Roboto Mono is loaded in the html
@@ -29,13 +29,13 @@ export default {
           families: [font],
         },
       });
-    },
-    biggerFontSize: state => {
+    }),
+    biggerFontSize: action(state => {
       state.fontSize++;
-    },
-    smallerFontSize: state => {
+    }),
+    smallerFontSize: action(state => {
       state.fontSize--;
-    },
+    }),
   },
   notes: {
     listOpen: false,
@@ -52,40 +52,40 @@ export default {
         content: null,
       },
     ],
-    deleteCurrent: state => {
+    deleteCurrent: action(state => {
       const oldIndex = state.currentIndex;
       state.currentIndex = oldIndex === 0 ? 0 : state.currentIndex - 1;
       state.list.splice(oldIndex, 1);
-    },
-    deleteNote: (state, id) => {
+    }),
+    deleteNote: action((state, id) => {
       const index = state.list.findIndex(n => n.id === id);
       state.list.splice(index, 1);
-    },
-    setTitle: (state, { id, title }) => {
+    }),
+    setTitle: action((state, { id, title }) => {
       const index = state.list.findIndex(n => n.id === id);
       state.list[index].title = title;
-    },
-    select: (state, id) => {
+    }),
+    select: action((state, id) => {
       const index = state.list.findIndex(n => n.id === id);
       state.currentIndex = index;
-    },
-    create: state => {
+    }),
+    create: action(state => {
       const newLength = state.list.push({
         id: uuidv4(),
         title: `Note ${state.list.length + 1}`,
         content: null,
       });
       state.currentIndex = newLength - 1;
-    },
-    setCurrentNote: (state, contentStateRaw) => {
+    }),
+    setCurrentNote: action((state, contentStateRaw) => {
       state.list[state.currentIndex].content = contentStateRaw;
-    },
-    closeList: state => {
+    }),
+    closeList: action(state => {
       state.listOpen = false;
-    },
-    toggleList: state => {
+    }),
+    toggleList: action(state => {
       state.listOpen = !state.listOpen;
-    },
+    }),
     currentNote: select(state => {
       return state.list[state.currentIndex];
     }),

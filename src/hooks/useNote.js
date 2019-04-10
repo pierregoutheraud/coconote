@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useStore, useAction } from "easy-peasy";
+import { useStore, useActions } from "easy-peasy";
 import {
   ContentState,
   EditorState,
@@ -15,34 +15,31 @@ let timeout = null;
 
 export default function useNote() {
   const currentNote = useStore(state => state.notes.currentNote);
-  const setCurrentNote = useAction(dispatch => dispatch.notes.setCurrentNote);
+  const setCurrentNote = useActions(dispatch => dispatch.notes.setCurrentNote);
   const [editorState, _setEditorState] = useState(null);
 
   // Initial state from global state
-  useEffect(
-    () => {
-      // initial editor state from global state OR empty
-      let initialEditorState;
-      if (!currentNote.content) {
-        if (currentNote.content === null) {
-          initialEditorState = EditorState.createEmpty();
-          // initialEditorState = EditorState.createWithContent(
-          //   ContentState.createFromText("Your new note here.")
-          // );
-        } else {
-          initialEditorState = EditorState.createWithContent(
-            convertFromRaw(DEFAULT_CONTENT_STATE_RAW)
-          );
-        }
+  useEffect(() => {
+    // initial editor state from global state OR empty
+    let initialEditorState;
+    if (!currentNote.content) {
+      if (currentNote.content === null) {
+        initialEditorState = EditorState.createEmpty();
+        // initialEditorState = EditorState.createWithContent(
+        //   ContentState.createFromText("Your new note here.")
+        // );
       } else {
-        const contentState = convertFromRaw(currentNote.content);
-        initialEditorState = EditorState.createWithContent(contentState);
+        initialEditorState = EditorState.createWithContent(
+          convertFromRaw(DEFAULT_CONTENT_STATE_RAW)
+        );
       }
+    } else {
+      const contentState = convertFromRaw(currentNote.content);
+      initialEditorState = EditorState.createWithContent(contentState);
+    }
 
-      _setEditorState(initialEditorState);
-    },
-    [currentNote.id]
-  );
+    _setEditorState(initialEditorState);
+  }, [currentNote.id]);
 
   function setEditorState(editorState, contentHasChanged) {
     _setEditorState(editorState);

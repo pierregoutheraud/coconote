@@ -1,17 +1,20 @@
 import React from "react";
-import { useStore, useAction } from "easy-peasy";
+import { useStore, useActions } from "easy-peasy";
 import cx from "classnames";
 
 import Icon from "../Icon/Icon";
 import styles from "./NotesList.css";
+import NotesListItem from "./NoteListItem";
 
 export default function NotesList({ className }) {
   const list = useStore(state => state.notes.list);
   const currentNote = useStore(state => state.notes.currentNote);
-  const createNote = useAction(dispatch => dispatch.notes.create);
-  const selectNote = useAction(dispatch => dispatch.notes.select);
-  const setTitle = useAction(dispatch => dispatch.notes.setTitle);
-  const deleteCurrentNote = useAction(dispatch => dispatch.notes.deleteCurrent);
+  const createNote = useActions(dispatch => dispatch.notes.create);
+  const selectNote = useActions(dispatch => dispatch.notes.select);
+  const setTitle = useActions(dispatch => dispatch.notes.setTitle);
+  const deleteCurrentNote = useActions(
+    dispatch => dispatch.notes.deleteCurrent
+  );
 
   function handleChangeTitle(e, id) {
     const { value } = e.target;
@@ -30,19 +33,13 @@ export default function NotesList({ className }) {
 
   const _list = list.map(note => {
     return (
-      <button
+      <NotesListItem
         key={note.id}
-        className={cx(styles.note, {
-          [styles.active]: note.id === currentNote.id,
-        })}
         onClick={() => selectNote(note.id)}
-      >
-        <input
-          type="text"
-          defaultValue={note.title}
-          onChange={e => handleChangeTitle(e, note.id)}
-        />
-      </button>
+        onChange={e => handleChangeTitle(e, note.id)}
+        note={note}
+        currentNote={currentNote}
+      />
     );
   });
 
