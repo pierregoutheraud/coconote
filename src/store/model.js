@@ -52,6 +52,13 @@ export default {
         content: null,
       },
     ],
+    moveNote: action((state, { oldIndex, newIndex }) => {
+      const currentNoteId = state.currentNote.id;
+      const item = state.list.splice(oldIndex, 1)[0];
+      state.list.splice(newIndex, 0, item);
+      const index = state.list.findIndex(n => n.id === currentNoteId);
+      state.currentIndex = index;
+    }),
     deleteCurrent: action(state => {
       const oldIndex = state.currentIndex;
       state.currentIndex = oldIndex === 0 ? 0 : state.currentIndex - 1;

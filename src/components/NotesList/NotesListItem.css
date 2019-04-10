@@ -1,20 +1,21 @@
 .note {
   display: flex;
-  justify-content: center;
+  align-items: center;
   color: white;
   width: 100%;
   text-align: left;
   transition: background 300ms;
-  padding: 20px 20px;
+  padding: 20px 15px;
+  cursor: pointer;
 }
 
 .note input {
-  cursor: pointer;
   color: white;
   font-size: 17px;
   background: none;
   border: none;
   width: 100%;
+  cursor: pointer;
 }
 
 .note:hover {
@@ -31,4 +32,9 @@
 }
 .note.active input {
   font-weight: 700;
+}
+
+.handle {
+  margin-right: 15px;
+  cursor: move;
 }

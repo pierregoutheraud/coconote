@@ -1,10 +1,38 @@
 import React from "react";
 import { useStore, useActions } from "easy-peasy";
 import cx from "classnames";
+import {
+  SortableContainer,
+  SortableElement,
+  SortableHandle,
+} from "react-sortable-hoc";
 
 import Icon from "../Icon/Icon";
 import styles from "./NotesList.css";
 import NotesListItem from "./NoteListItem";
+
+const SortableItem = SortableElement(NotesListItem);
+
+// const SortableItem = SortableElement(({ note }) => (
+//   <li style={{ height: 50, color: "white" }}>{note.title}</li>
+// ));
+
+const SortableList = SortableContainer(({ items, currentNote, selectNote }) => {
+  return (
+    <ul className={styles.notes}>
+      {items.map((note, index) => (
+        <SortableItem
+          key={note.id}
+          index={index}
+          onClick={() => selectNote(note.id)}
+          onChange={e => handleChangeTitle(e, note.id)}
+          note={note}
+          currentNote={currentNote}
+        />
+      ))}
+    </ul>
+  );
+});
 
 export default function NotesList({ className }) {
   const list = useStore(state => state.notes.list);
@@ -12,6 +40,7 @@ export default function NotesList({ className }) {
   const createNote = useActions(dispatch => dispatch.notes.create);
   const selectNote = useActions(dispatch => dispatch.notes.select);
   const setTitle = useActions(dispatch => dispatch.notes.setTitle);
+  const moveNote = useActions(dispatch => dispatch.notes.moveNote);
   const deleteCurrentNote = useActions(
     dispatch => dispatch.notes.deleteCurrent
   );
@@ -31,21 +60,20 @@ export default function NotesList({ className }) {
     deleteCurrentNote();
   }
 
-  const _list = list.map(note => {
-    return (
-      <NotesListItem
-        key={note.id}
-        onClick={() => selectNote(note.id)}
-        onChange={e => handleChangeTitle(e, note.id)}
-        note={note}
-        currentNote={currentNote}
-      />
-    );
-  });
-
   return (
     <aside className={cx(styles.container, className)}>
-      <div className={styles.notes}>{_list}</div>
+      <SortableList
+        items={list}
+        currentNote={currentNote}
+        selectNote={selectNote}
+        onSortEnd={moveNote}
+        helperClass={styles.sortableHelper}
+        axis="y"
+        lockAxis="y"
+        useDragHandle
+        lockToContainerEdges
+        lockOffset="0%"
+      />
       <div className={styles.buttons}>
         {list.length > 1 && (
           <Icon
@@ -66,7 +94,6 @@ export default function NotesList({ className }) {
           />
         )}
       </div>
-
       {/* <button className={styles.add}>
         <i className="material-icons">add_box</i>
       </button> */}
