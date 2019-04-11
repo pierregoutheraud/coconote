@@ -27,6 +27,10 @@ button {
   cursor: pointer;
 }
 
+input {
+  font-family: "Roboto Mono", monospace;
+}
+
 *,
 *:before,
 *:after {
