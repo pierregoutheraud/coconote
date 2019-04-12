@@ -75,22 +75,22 @@ export default function NotesList({ className }) {
         lockOffset="0%"
       />
       <div className={styles.buttons}>
-        {list.length > 1 && (
-          <Icon
-            className={cx(styles.icon, styles.remove)}
-            onClick={handleClickDelete}
-            name="remove"
-            size={28}
-            title="Remove note"
-          />
-        )}
         {list.length < 30 && (
           <Icon
             className={cx(styles.icon, styles.add)}
             size={28}
-            name="add"
+            name="note_add"
             onClick={createNote}
             title="Add a note"
+          />
+        )}
+        {list.length > 1 && (
+          <Icon
+            className={cx(styles.icon, styles.remove)}
+            onClick={handleClickDelete}
+            name="delete_forever"
+            size={33}
+            title="Remove note"
           />
         )}
       </div>
