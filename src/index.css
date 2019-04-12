@@ -16,6 +16,7 @@ body {
 body {
   opacity: 0;
   transition: opacity 300ms;
+  overflow-x: hidden;
 }
 :global(html.wf-active body) {
   opacity: 1;
