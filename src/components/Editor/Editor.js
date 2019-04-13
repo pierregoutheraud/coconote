@@ -7,6 +7,7 @@ import cx from "classnames";
 
 import useNote from "../../hooks/useNote";
 import "draft-js/dist/Draft.css";
+import EditorToolbar from "../EditorToolbar/EditorToolbar";
 // import "draft-js-linkify-plugin/lib/plugin.css";
 import styles from "./Editor.css";
 
@@ -26,10 +27,7 @@ export default function MyEditor() {
   const closeList = useActions(dispatch => dispatch.notes.closeList);
 
   function onChange(newEditorState) {
-    // https://github.com/facebook/draft-js/issues/1060
-    const contentHasChanged =
-      editorState.getCurrentContent() !== newEditorState.getCurrentContent();
-    setEditorState(newEditorState, contentHasChanged);
+    setEditorState(newEditorState);
   }
 
   function handleKeyCommand(command, editorState) {
@@ -44,6 +42,13 @@ export default function MyEditor() {
   function handleFocus() {
     if (listOpen) {
       closeList();
+    }
+  }
+
+  function blockStyleFn(contentBlock) {
+    const type = contentBlock.getType();
+    if (type === "header-one") {
+      return styles.title;
     }
   }
 
@@ -65,6 +70,7 @@ export default function MyEditor() {
         [styles.nightmode]: nightmode,
       })}
     >
+      <EditorToolbar editorState={editorState} onChange={onChange} />
       {editorState !== null && (
         <Editor
           editorState={editorState}
@@ -73,6 +79,7 @@ export default function MyEditor() {
           onChange={onChange}
           onFocus={handleFocus}
           plugins={[linkifyPlugin]}
+          blockStyleFn={blockStyleFn}
         />
       )}
     </div>

@@ -41,8 +41,12 @@ export default function useNote() {
     _setEditorState(initialEditorState);
   }, [currentNote.id]);
 
-  function setEditorState(editorState, contentHasChanged) {
-    _setEditorState(editorState);
+  function setEditorState(newEditorState) {
+    // https://github.com/facebook/draft-js/issues/1060
+    const contentHasChanged =
+      editorState.getCurrentContent() !== newEditorState.getCurrentContent();
+
+    _setEditorState(newEditorState);
 
     if (!contentHasChanged) {
       return;
@@ -51,7 +55,7 @@ export default function useNote() {
     // Save contentState to global state
     clearTimeout(timeout);
     timeout = setTimeout(() => {
-      const contentState = editorState.getCurrentContent();
+      const contentState = newEditorState.getCurrentContent();
       const contentStateRaw = convertToRaw(contentState);
       setCurrentNote(contentStateRaw);
     }, 300);

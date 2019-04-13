@@ -2,19 +2,23 @@ import React from "react";
 import cx from "classnames";
 import styles from "./Icon.css";
 
-export default function Icon({
-  className,
-  name,
-  size = 20,
-  onClick,
-  title = "",
-}) {
-  if (onClick) {
+export default function Icon(props) {
+  const {
+    className,
+    name,
+    size = 20,
+    onClick,
+    onMouseDown,
+    title = "",
+  } = props;
+
+  if (onClick || onMouseDown) {
+    const { className, ...rest } = props;
     return (
       <button
         className={cx(styles.container, className)}
-        onClick={onClick}
         title={title}
+        {...rest}
       >
         <i
           className={cx("material-icons", styles.icon)}

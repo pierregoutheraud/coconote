@@ -8,6 +8,11 @@
   color: white;
 }
 
+.title {
+  /* font-size: 30px; */
+  color: var(--main);
+}
+
 :global(.DraftEditor-root) {
   flex: 1;
   /* We could also use ch here --> width: 80ch; */
