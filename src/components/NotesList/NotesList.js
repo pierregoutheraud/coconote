@@ -18,6 +18,12 @@ const SortableItem = SortableElement(NotesListItem);
 // ));
 
 const SortableList = SortableContainer(({ items, currentNote, selectNote }) => {
+  const setTitle = useActions(dispatch => dispatch.notes.setTitle);
+  function handleChangeTitle(e, id) {
+    const { value } = e.target;
+    setTitle({ id, title: value });
+  }
+
   return (
     <ul className={styles.notes}>
       {items.map((note, index) => (
@@ -39,16 +45,10 @@ export default function NotesList({ className }) {
   const currentNote = useStore(state => state.notes.currentNote);
   const createNote = useActions(dispatch => dispatch.notes.create);
   const selectNote = useActions(dispatch => dispatch.notes.select);
-  const setTitle = useActions(dispatch => dispatch.notes.setTitle);
   const moveNote = useActions(dispatch => dispatch.notes.moveNote);
   const deleteCurrentNote = useActions(
     dispatch => dispatch.notes.deleteCurrent
   );
-
-  function handleChangeTitle(e, id) {
-    const { value } = e.target;
-    setTitle({ id, title: value });
-  }
 
   function handleClickDelete() {
     const res = window.confirm(
