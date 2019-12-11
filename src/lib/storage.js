@@ -5,6 +5,14 @@ import LZString from "lz-string";
 // Not from chrome.storage.sync.QUOTA_BYTES_PER_ITEM for firefox where its undefined
 const QUOTA_BYTES_PER_ITEM = 8192;
 
+/* Save from console
+with ({ copy }) {
+  chrome.storage.sync.get(null, function(result) {
+    copy(result);
+  });
+}
+*/
+
 class Storage {
   get(keys = null) {
     return new Promise(resolve => {
