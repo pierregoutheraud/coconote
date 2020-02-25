@@ -46,3 +46,7 @@ chrome.tabs.getCurrent(tab => {
 });
 
 render();
+
+if (module.hot) {
+  module.hot.accept();
+}

@@ -1,11 +1,13 @@
 import React from "react";
 import { useStore, useActions } from "easy-peasy";
 import cx from "classnames";
+import FileSaver from "file-saver";
 
 import styles from "./Settings.css";
 import { FONTS } from "../../constants/constants";
 import Toggle from "../Toggle/Toggle";
 import Radio from "../Radio/Radio";
+import { getStore } from "../../store/configureStore";
 
 export default function Settings({ className }) {
   const font = useStore(state => state.settings.font);
@@ -36,6 +38,32 @@ export default function Settings({ className }) {
     );
   });
 
+  function handleClickExport(e) {
+    e.preventDefault();
+    const {
+      notes: { list },
+    } = getStore().getState();
+
+    const notesTexts = list
+      .filter(l => l.content && l.content.blocks && l.content.blocks.length)
+      .map(l => {
+        return l.content.blocks.map(v => v.text).join("\n");
+      })
+      .reduce((acc, curr, i) => {
+        return i === 0
+          ? [...acc, curr]
+          : [...acc, "\n\n-----------------\n\n", curr];
+      }, []);
+
+    var blob = new Blob(notesTexts, {
+      type: "text/plain;charset=utf-8",
+    });
+    FileSaver.saveAs(
+      blob,
+      `coconote_notes_${new Date().toLocaleDateString()}.txt`
+    );
+  }
+
   return (
     <aside
       className={cx(styles.container, className, {
@@ -46,6 +74,7 @@ export default function Settings({ className }) {
         <h3>Font family</h3>
         <div className={styles.choices}>{fonts}</div>
       </fieldset>
+
       <fieldset className={cx(styles.fieldset, styles.fontSize)}>
         <h3>Font size</h3>
         <div className={styles.choices}>
@@ -58,6 +87,7 @@ export default function Settings({ className }) {
           </button>
         </div>
       </fieldset>
+
       <fieldset className={styles.fieldset}>
         <h3>Night mode</h3>
         <div className={styles.choices}>
@@ -66,6 +96,13 @@ export default function Settings({ className }) {
             onChange={value => edit({ field: "nightmode", value })}
           />
         </div>
+      </fieldset>
+
+      <fieldset className={styles.fieldset}>
+        <h3>Backup notes</h3>
+        <a href="" onClick={handleClickExport}>
+          Export as text file
+        </a>
       </fieldset>
     </aside>
   );

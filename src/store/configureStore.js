@@ -2,10 +2,11 @@ import { createStore } from "easy-peasy";
 import storage from "../lib/storage";
 import model from "./model";
 
+let store = null;
 export default async function() {
   const persistedState = await storage.loadState();
 
-  const store = createStore(model, {
+  store = createStore(model, {
     initialState: persistedState,
   });
 
@@ -16,5 +17,9 @@ export default async function() {
     await storage.saveState(store.getState());
   });
 
+  return store;
+}
+
+export function getStore() {
   return store;
 }

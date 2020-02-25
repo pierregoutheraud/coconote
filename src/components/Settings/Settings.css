@@ -23,6 +23,14 @@
   margin-bottom: 20px;
 }
 
+.fieldset a {
+  color: white;
+  font-size: 15px;
+}
+.fieldset a:hover {
+  text-decoration: none;
+}
+
 .choices {
   display: flex;
   flex-direction: column;
