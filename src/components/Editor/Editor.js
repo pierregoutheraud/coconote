@@ -1,6 +1,6 @@
 import React from "react";
 import { useStore, useActions } from "easy-peasy";
-import { RichUtils } from "draft-js";
+import { RichUtils, convertToRaw } from "draft-js";
 import Editor from "draft-js-plugins-editor";
 import createLinkifyPlugin from "draft-js-linkify-plugin";
 import cx from "classnames";
@@ -25,6 +25,12 @@ export default function MyEditor() {
   const nightmode = useStore(state => state.settings.nightmode);
   const listOpen = useStore(state => state.notes.listOpen);
   const closeList = useActions(dispatch => dispatch.notes.closeList);
+
+  // let text;
+  // if (editorState) {
+  //   text = editorState.getCurrentContent().getPlainText();
+  // }
+  // console.log("render Editor", text);
 
   function onChange(newEditorState) {
     setEditorState(newEditorState);

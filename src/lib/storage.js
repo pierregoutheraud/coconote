@@ -1,6 +1,6 @@
 import LZString from "lz-string";
-// Allows to store large object in chrome.storage.sync, by compressing and splitting in different keys
-// import "chrome-storage-largesync/dist/chrome-Storage-largeSync.min.js";
+import { db, getUserId } from "../lib/firebase";
+import { getTab } from "./chrome";
 
 // Not from chrome.storage.sync.QUOTA_BYTES_PER_ITEM for firefox where its undefined
 const QUOTA_BYTES_PER_ITEM = 8192;
@@ -14,47 +14,37 @@ with ({ copy }) {
 */
 
 class Storage {
-  get(keys = null) {
-    return new Promise(resolve => {
-      chrome.storage.sync.get(keys, function(result) {
-        resolve(result);
-      });
-    });
+  async get() {
+    const stateDoc = await db
+      .collection("states")
+      .doc(getUserId())
+      .get();
+
+    if (!stateDoc.exists) {
+      return null;
+    }
+
+    return stateDoc.data();
   }
 
-  set(obj) {
-    return new Promise((resolve, reject) => {
-      chrome.storage.sync.set(obj, function() {
-        if (chrome.runtime.lastError) {
-          consoleh.error(chrome.runtime.lastError.message);
-          reject(chrome.runtime.lastError);
-        }
-        resolve();
+  async set(obj) {
+    const tab = await getTab();
+    return db
+      .collection("states")
+      .doc(getUserId())
+      .set({
+        source: `chrome${tab.id}`,
+        ...obj,
       });
-    });
   }
 
-  clear() {
-    return new Promise((resolve, reject) => {
-      chrome.storage.sync.clear(function() {
-        if (chrome.runtime.lastError) {
-          console.error(chrome.runtime.lastError.message);
-          reject(chrome.runtime.lastError);
-        }
-        resolve();
-      });
-    });
-  }
-
-  async loadState() {
-    const result = await this.get();
+  decompressObject(obj) {
     let str = "";
-    for (let key in result) {
-      str += result[key];
+    for (let key in obj) {
+      str += obj[key];
     }
     str = LZString.decompressFromBase64(str);
-    const state = JSON.parse(str);
-    return state;
+    return JSON.parse(str);
   }
 
   compressObject(obj) {
@@ -79,9 +69,22 @@ class Storage {
     return newObj;
   }
 
+  async loadState() {
+    const result = await this.get();
+    if (!result) {
+      return null;
+    }
+    return result;
+    // return this.decompressObject(result);
+  }
+
   async saveState(state) {
-    const obj = this.compressObject(state);
-    await this.clear();
+    const whitelist = ["settings", "notes"];
+    const obj = whitelist.reduce((acc, curr) => {
+      acc[curr] = state[curr];
+      return acc;
+    }, {});
+    // const obj = this.compressObject(state);
     await this.set(obj);
   }
 }

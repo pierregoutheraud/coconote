@@ -11,6 +11,14 @@
   "chrome_url_overrides": {
     "newtab": "index.html"
   },
-  "permissions": ["storage"],
-  "content_security_policy": "default-src 'self'; script-src 'self' 'unsafe-eval' https://ajax.googleapis.com/; connect-src ws://localhost:63168/; font-src *; style-src *;"
+  "permissions": ["storage", "identity"],
+  "content_security_policy": "default-src 'self'; frame-src https://*.firebaseio.com; script-src 'self' 'unsafe-eval' https://ajax.googleapis.com/ https://www.gstatic.com/ https://*.firebaseio.com https://www.googleapis.com; connect-src ws://localhost:63168/ ws://*.firebaseio.com https://*.googleapis.com/; font-src *; style-src *; img-src https://www.google.com/",
+  "oauth2": {
+    "client_id": "389374090163-ao1atk67dlr8jaam9fe16tsbqig59519.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/userinfo.email",
+      "https://www.googleapis.com/auth/userinfo.profile"
+    ]
+  },
+  "key": "-----BEGIN PUBLIC KEY-----MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA455EvgcKhC10rNX4lFg/LH15a0c+VYc3+abZvsWRPvquZ/YabGnO30167S0VPpjFgStcdB1DQIdeZMy/9sbLMrIkLc9/ey1X5yoT0PYDpvVJm3Ze3XlisOtp8Fk1rN/qchbc60JcYQ0EeLUxbBDh7S3LDnzKFy88ECYYpHrW9gZI1iDkxAdyub7xVyhyvHEic6dsLkYiKxnjAwk1A0MyKg518ypNgxEcGyZtdv0kWk9A3FY9BnPJq4PTyCpsmjVQlfaYRR3oGmKnoFqfK/IZPDo4OXUW2fLf05iB345nmr/OC0AbIDqALqoQrOGJvoF5vIDwEu6gMczuE7vYuIh4bwIDAQAB-----END PUBLIC KEY-----"
 }

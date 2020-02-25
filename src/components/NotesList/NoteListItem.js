@@ -29,7 +29,7 @@ export default function NotesListItem({
     >
       <div className={styles.wrapper}>
         <DragHandle />
-        <input type="text" defaultValue={note.title} onChange={onChange} />
+        <input type="text" value={note.title} onChange={onChange} />
       </div>
     </li>
   );

@@ -3,6 +3,20 @@ import uuidv4 from "uuid/v4";
 import { FONTS } from "../constants/constants";
 
 export default {
+  initState: action((state, s) => {
+    // console.log("initState", s);
+    return {
+      ...state,
+      ...s,
+    };
+  }),
+  // auth: {
+  //   userId: null,
+  //   setUser: action((state, user) => {
+  //     state.init = true;
+  //     state.userId = user.uid;
+  //   }),
+  // },
   settings: {
     open: false,
     font: FONTS[0],
@@ -44,7 +58,7 @@ export default {
       {
         id: uuidv4(),
         title: "Note 1",
-        content: undefined,
+        content: null,
       },
       {
         id: uuidv4(),

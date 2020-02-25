@@ -4,10 +4,12 @@ import ReactDOM from "react-dom";
 import { StoreProvider } from "easy-peasy";
 import App from "./App";
 import configureStore from "./store/configureStore";
+import { db } from "./lib/firebase";
+import { getTab } from "./lib/chrome";
 import "./index.css";
 
 async function render(force) {
-  const store = await configureStore();
+  const store = configureStore();
 
   const div = document.querySelector("#root");
 
@@ -23,9 +25,33 @@ async function render(force) {
   );
 }
 
-let tabId;
-let timeout;
+/*
+let unsub = undefined;
+getTab().then(tab => {
+  if (unsub) {
+    unsub();
+  }
+  unsub = db
+    .collection("states")
+    .doc(user.uid)
+    .onSnapshot(function(doc) {
+      if (doc.exists) {
+        // onUpdate(doc.data())
+        // var source = doc.metadata.hasPendingWrites ? "Local" : "Server";
+        // console.log(source);
+        // if (source === "Server") {
+        //   const obj = doc.data();
+        //   const state = storage.decompressObject(obj);
+        //   // const state = obj;
+        //   initState(state);
+        // }
+      }
+      setLogged(true);
+    });
+});
+*/
 
+/*
 // Re-render in case we are not the focused tab and we received new data from chrome.storage
 function onStateUpdate() {
   chrome.tabs.query({ active: true, lastFocusedWindow: true }, function(tabs) {
@@ -35,7 +61,9 @@ function onStateUpdate() {
     }
   });
 }
+*/
 
+/*
 chrome.tabs.getCurrent(tab => {
   tabId = tab.id;
   chrome.storage.onChanged.addListener(function(changes, namespace) {
@@ -44,5 +72,6 @@ chrome.tabs.getCurrent(tab => {
     timeout = setTimeout(onStateUpdate, 300);
   });
 });
+*/
 
 render();

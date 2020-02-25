@@ -6,10 +6,13 @@ import Editor from "./components/Editor/Editor";
 import Settings from "./components/Settings/Settings";
 import NotesList from "./components/NotesList/NotesList";
 import SidebarButton from "./components/SidebarButton/SidebarButton";
+import useAuth from "./hooks/useAuth";
+import Loading from "./components/Loading/Loading";
 
 import styles from "./App.css";
 
 export default function App() {
+  const logged = useAuth();
   const settingsOpen = useStore(state => state.settings.open);
   const nightmode = useStore(state => state.settings.nightmode);
   const edit = useActions(dispatch => dispatch.settings.edit);
@@ -17,6 +20,14 @@ export default function App() {
   const listOpen = useStore(state => state.notes.listOpen);
   const toggleList = useActions(dispatch => dispatch.notes.toggleList);
   const closeList = useActions(dispatch => dispatch.notes.closeList);
+
+  if (!logged) {
+    return (
+      <main className={cx(styles.container, styles.loading)}>
+        <Loading />
+      </main>
+    );
+  }
 
   function toggleSettings() {
     edit({ field: "open", value: !settingsOpen });
@@ -29,7 +40,7 @@ export default function App() {
   }
 
   return (
-    <div
+    <main
       className={cx(styles.container, {
         [styles.settingsOpen]: settingsOpen,
         [styles.listOpen]: listOpen,
@@ -57,6 +68,6 @@ export default function App() {
       <section className={styles.editor}>
         <Editor />
       </section>
-    </div>
+    </main>
   );
 }
