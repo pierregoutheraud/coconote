@@ -28,6 +28,7 @@
     "@babel/plugin-transform-async-to-generator": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-stage-0": "^7.0.0",
-    "cssnano": "^4.1.0"
+    "cssnano": "^4.1.0",
+    "parcel-bundler": "^1.12.4"
   }
 }
