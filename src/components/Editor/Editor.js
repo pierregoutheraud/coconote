@@ -1,5 +1,5 @@
 import React from "react";
-import { useStore, useActions } from "easy-peasy";
+import { useStoreState, useStoreActions } from "easy-peasy";
 import { RichUtils } from "draft-js";
 import Editor from "draft-js-plugins-editor";
 import createLinkifyPlugin from "draft-js-linkify-plugin";
@@ -20,11 +20,11 @@ const linkifyPlugin = createLinkifyPlugin({
 
 export default function MyEditor() {
   const [editorState, setEditorState] = useNote();
-  const font = useStore(state => state.settings.font);
-  const fontSize = useStore(state => state.settings.fontSize);
-  const nightmode = useStore(state => state.settings.nightmode);
-  const listOpen = useStore(state => state.notes.listOpen);
-  const closeList = useActions(dispatch => dispatch.notes.closeList);
+  const font = useStoreState(state => state.settings.font);
+  const fontSize = useStoreState(state => state.settings.fontSize);
+  const nightmode = useStoreState(state => state.settings.nightmode);
+  const listOpen = useStoreState(state => state.notes.listOpen);
+  const closeList = useStoreActions(dispatch => dispatch.notes.closeList);
 
   function onChange(newEditorState) {
     setEditorState(newEditorState);

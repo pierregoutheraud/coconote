@@ -1,5 +1,5 @@
 import React from "react";
-import { useStore, useActions } from "easy-peasy";
+import { useStoreState, useStoreActions } from "easy-peasy";
 import cx from "classnames";
 
 import Editor from "./components/Editor/Editor";
@@ -10,13 +10,15 @@ import SidebarButton from "./components/SidebarButton/SidebarButton";
 import styles from "./App.css";
 
 export default function App() {
-  const settingsOpen = useStore(state => state.settings.open);
-  const nightmode = useStore(state => state.settings.nightmode);
-  const edit = useActions(dispatch => dispatch.settings.edit);
-  const closeSettings = useActions(dispatch => dispatch.settings.closeSettings);
-  const listOpen = useStore(state => state.notes.listOpen);
-  const toggleList = useActions(dispatch => dispatch.notes.toggleList);
-  const closeList = useActions(dispatch => dispatch.notes.closeList);
+  const settingsOpen = useStoreState(state => state.settings.open);
+  const nightmode = useStoreState(state => state.settings.nightmode);
+  const edit = useStoreActions(dispatch => dispatch.settings.edit);
+  const closeSettings = useStoreActions(
+    dispatch => dispatch.settings.closeSettings
+  );
+  const listOpen = useStoreState(state => state.notes.listOpen);
+  const toggleList = useStoreActions(dispatch => dispatch.notes.toggleList);
+  const closeList = useStoreActions(dispatch => dispatch.notes.closeList);
 
   function toggleSettings() {
     edit({ field: "open", value: !settingsOpen });

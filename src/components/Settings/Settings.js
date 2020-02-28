@@ -1,5 +1,5 @@
 import React from "react";
-import { useStore, useActions } from "easy-peasy";
+import { useStoreState, useStoreActions } from "easy-peasy";
 import cx from "classnames";
 import FileSaver from "file-saver";
 
@@ -10,17 +10,17 @@ import Radio from "../Radio/Radio";
 import { getStore } from "../../store/configureStore";
 
 export default function Settings({ className }) {
-  const font = useStore(state => state.settings.font);
-  const fontSize = useStore(state => state.settings.fontSize);
-  const nightmode = useStore(state => state.settings.nightmode);
-  const setFont = useActions(dispatch => dispatch.settings.setFont);
-  const smallerFontSize = useActions(
+  const font = useStoreState(state => state.settings.font);
+  const fontSize = useStoreState(state => state.settings.fontSize);
+  const nightmode = useStoreState(state => state.settings.nightmode);
+  const setFont = useStoreActions(dispatch => dispatch.settings.setFont);
+  const smallerFontSize = useStoreActions(
     dispatch => dispatch.settings.smallerFontSize
   );
-  const biggerFontSize = useActions(
+  const biggerFontSize = useStoreActions(
     dispatch => dispatch.settings.biggerFontSize
   );
-  const edit = useActions(dispatch => dispatch.settings.edit);
+  const edit = useStoreActions(dispatch => dispatch.settings.edit);
 
   const fonts = FONTS.map(f => {
     return (

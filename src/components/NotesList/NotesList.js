@@ -1,5 +1,5 @@
 import React from "react";
-import { useStore, useActions } from "easy-peasy";
+import { useStoreState, useStoreActions } from "easy-peasy";
 import cx from "classnames";
 import {
   SortableContainer,
@@ -18,7 +18,7 @@ const SortableItem = SortableElement(NotesListItem);
 // ));
 
 const SortableList = SortableContainer(({ items, currentNote, selectNote }) => {
-  const setTitle = useActions(dispatch => dispatch.notes.setTitle);
+  const setTitle = useStoreActions(dispatch => dispatch.notes.setTitle);
   function handleChangeTitle(e, id) {
     const { value } = e.target;
     setTitle({ id, title: value });
@@ -41,12 +41,12 @@ const SortableList = SortableContainer(({ items, currentNote, selectNote }) => {
 });
 
 export default function NotesList({ className }) {
-  const list = useStore(state => state.notes.list);
-  const currentNote = useStore(state => state.notes.currentNote);
-  const createNote = useActions(dispatch => dispatch.notes.create);
-  const selectNote = useActions(dispatch => dispatch.notes.select);
-  const moveNote = useActions(dispatch => dispatch.notes.moveNote);
-  const deleteCurrentNote = useActions(
+  const list = useStoreState(state => state.notes.list);
+  const currentNote = useStoreState(state => state.notes.currentNote);
+  const createNote = useStoreActions(dispatch => dispatch.notes.create);
+  const selectNote = useStoreActions(dispatch => dispatch.notes.select);
+  const moveNote = useStoreActions(dispatch => dispatch.notes.moveNote);
+  const deleteCurrentNote = useStoreActions(
     dispatch => dispatch.notes.deleteCurrent
   );
 

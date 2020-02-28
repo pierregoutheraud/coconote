@@ -1,5 +1,5 @@
 import React from "react";
-import { useStore } from "easy-peasy";
+import { useStoreState } from "easy-peasy";
 import cx from "classnames";
 import styles from "./SidebarButton.css";
 
@@ -11,7 +11,7 @@ export default function SidebarButton({
   isHidden,
   onClick,
 }) {
-  const nightmode = useStore(state => state.settings.nightmode);
+  const nightmode = useStoreState(state => state.settings.nightmode);
 
   if (isHidden) {
     return null;

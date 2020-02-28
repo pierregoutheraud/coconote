@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useStore, useActions } from "easy-peasy";
+import { useStoreState, useStoreActions } from "easy-peasy";
 import {
   ContentState,
   EditorState,
@@ -14,8 +14,10 @@ import {
 let timeout = null;
 
 export default function useNote() {
-  const currentNote = useStore(state => state.notes.currentNote);
-  const setCurrentNote = useActions(dispatch => dispatch.notes.setCurrentNote);
+  const currentNote = useStoreState(state => state.notes.currentNote);
+  const setCurrentNote = useStoreActions(
+    dispatch => dispatch.notes.setCurrentNote
+  );
   const [editorState, _setEditorState] = useState(null);
 
   // Initial state from global state
