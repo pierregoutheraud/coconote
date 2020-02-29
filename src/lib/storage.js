@@ -46,15 +46,13 @@ class Storage {
     });
   }
 
-  async loadState() {
-    const result = await this.get();
+  decompressObject(obj) {
     let str = "";
-    for (let key in result) {
-      str += result[key];
+    for (let key in obj) {
+      str += obj[key].newValue || obj[key]; // to be able to decompress changes object as well
     }
     str = LZString.decompressFromBase64(str);
-    const state = JSON.parse(str);
-    return state;
+    return JSON.parse(str);
   }
 
   compressObject(obj) {
@@ -79,9 +77,33 @@ class Storage {
     return newObj;
   }
 
+  async loadState() {
+    const result = await this.get();
+
+    /*
+    const obj = {
+      ...result,
+      notes: this.decompressObject(result.notes),
+    };
+    */
+
+    const obj = this.decompressObject(result);
+    console.log("loadState", obj);
+    return obj;
+  }
+
   async saveState(state) {
+    /*
+    const { notes, ...rest } = state;
+    const obj = {
+      ...rest,
+      notes: this.compressObject(notes),
+    };
+    */
+
     const obj = this.compressObject(state);
-    await this.clear();
+    // await this.clear();
+    console.log("saveState", obj);
     await this.set(obj);
   }
 }

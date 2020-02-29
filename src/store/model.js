@@ -1,8 +1,15 @@
 import { select, action } from "easy-peasy";
 import uuidv4 from "uuid/v4";
 import { FONTS } from "../constants/constants";
+import { loadFont } from "../lib/utils";
 
 export default {
+  updateState: action((state, s) => {
+    return {
+      ...state,
+      ...s,
+    };
+  }),
   settings: {
     open: false,
     font: FONTS[0],
@@ -17,18 +24,7 @@ export default {
     }),
     setFont: action((state, font) => {
       state.font = font;
-
-      // Roboto Mono is loaded in the html
-      // and should already be loaded at this point
-      if (font === "Roboto Mono") {
-        return document.documentElement.classList.add("wf-active");
-      }
-
-      window.WebFont.load({
-        google: {
-          families: [font],
-        },
-      });
+      loadFont(font);
     }),
     biggerFontSize: action(state => {
       state.fontSize++;

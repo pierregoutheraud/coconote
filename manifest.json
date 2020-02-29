@@ -16,6 +16,9 @@
       "id": "dev@coconote.com"
     }
   },
+  "browser_action": {
+    "default_popup": "dist/popup.html"
+  },
   "permissions": ["storage"],
   "content_security_policy": "default-src 'self'; script-src 'self' 'unsafe-eval' https://ajax.googleapis.com/; connect-src ws://localhost:63168/; font-src *; style-src *;"
 }

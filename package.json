@@ -3,7 +3,7 @@
   "version": "1.3.5",
   "license": "MIT",
   "scripts": {
-    "start": "parcel watch src/index.html --public-url=\"./\" --hmr-hostname localhost --hmr-port 63168",
+    "start": "parcel watch src/index.html src/popup.html --public-url=\"./\" --hmr-hostname localhost --hmr-port 63168",
     "build": "rm -rf dist && rm -f ./dist.zip && parcel build src/index.html --public-url=\"./\" --no-source-maps && cp -R icons ./dist/ && cp -R manifest-prod.json ./dist/manifest.json && zip -r -X dist.zip dist && cd dist && zip -X ../dist-ff.zip ./**/*"
   },
   "dependencies": {
