@@ -11,11 +11,6 @@
   "chrome_url_overrides": {
     "newtab": "dist/index.html"
   },
-  "applications": {
-    "gecko": {
-      "id": "dev@coconote.com"
-    }
-  },
   "browser_action": {
     "default_popup": "dist/popup.html"
   },
