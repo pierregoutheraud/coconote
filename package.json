@@ -1,6 +1,6 @@
 {
   "name": "coconote",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "license": "MIT",
   "scripts": {
     "start": "parcel watch src/index.html src/popup.html --public-url=\"./\" --hmr-hostname localhost --hmr-port 63168",
