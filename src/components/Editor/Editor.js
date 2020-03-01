@@ -1,9 +1,10 @@
 import React from "react";
+import cx from "classnames";
 import { useStoreState, useStoreActions } from "easy-peasy";
 import { RichUtils } from "draft-js";
 import Editor from "draft-js-plugins-editor";
 import createLinkifyPlugin from "draft-js-linkify-plugin";
-import cx from "classnames";
+import createMarkdownShortcutsPlugin from "draft-js-markdown-shortcuts-plugin";
 
 import useNote from "../../hooks/useNote";
 import "draft-js/dist/Draft.css";
@@ -17,6 +18,7 @@ const linkifyPlugin = createLinkifyPlugin({
     <a {...props} onClick={() => window.open(props.href, "_blank")} />
   ),
 });
+const markdownPlugin = createMarkdownShortcutsPlugin();
 
 export default function MyEditor() {
   const [editorState, setEditorState] = useNote();
@@ -78,7 +80,7 @@ export default function MyEditor() {
           handleKeyCommand={handleKeyCommand}
           onChange={onChange}
           onFocus={handleFocus}
-          plugins={[linkifyPlugin]}
+          plugins={[linkifyPlugin, markdownPlugin]}
           blockStyleFn={blockStyleFn}
         />
       )}

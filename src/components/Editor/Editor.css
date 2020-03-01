@@ -37,3 +37,13 @@
 :global(.draftJsLinkifyPlugin__link__2ittM:hover) {
   color: var(--main);
 }
+
+/* Lists 1, 2, 3 */
+
+/* :global(.public-DraftStyleDefault-depth0.public-DraftStyleDefault-listLTR) {
+  margin-left: 36px;
+} */
+
+:global(.public-DraftStyleDefault-ol) {
+  margin-left: 10px;
+}
