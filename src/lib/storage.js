@@ -102,8 +102,10 @@ class Storage {
     */
 
     const obj = this.compressObject(state);
-    // await this.clear();
-    console.log("saveState", obj);
+
+    // Because of compression, we need to clear all keys
+    await this.clear();
+
     // console.log("saveState", obj);
     await this.set(obj);
   }
