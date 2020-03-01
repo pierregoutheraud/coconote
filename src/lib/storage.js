@@ -88,7 +88,7 @@ class Storage {
     */
 
     const obj = this.decompressObject(result);
-    console.log("loadState", obj);
+    // console.log("loadState", obj);
     return obj;
   }
 
@@ -104,6 +104,7 @@ class Storage {
     const obj = this.compressObject(state);
     // await this.clear();
     console.log("saveState", obj);
+    // console.log("saveState", obj);
     await this.set(obj);
   }
 }

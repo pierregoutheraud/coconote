@@ -45,7 +45,7 @@ function handleChanged(changes, namespace) {
 }
 
 async function render(force) {
-  console.log("render()");
+  // console.log("render()");
 
   tabId = await getCurrentTabId();
 
