@@ -1,6 +1,6 @@
 import React from "react";
 import cx from "classnames";
-import styles from "./Icon.css";
+import styles from "./Icon.module.css";
 
 export default function Icon(props) {
   const {

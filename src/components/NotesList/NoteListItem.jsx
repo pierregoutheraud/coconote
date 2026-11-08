@@ -3,7 +3,7 @@ import cx from "classnames";
 import { SortableHandle } from "react-sortable-hoc";
 
 import Icon from "../Icon/Icon";
-import styles from "./NotesListItem.css";
+import styles from "./NotesListItem.module.css";
 
 const DragHandle = SortableHandle(() => (
   <Icon

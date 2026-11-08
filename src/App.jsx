@@ -7,7 +7,7 @@ import Settings from "./components/Settings/Settings";
 import NotesList from "./components/NotesList/NotesList";
 import SidebarButton from "./components/SidebarButton/SidebarButton";
 
-import styles from "./App.css";
+import styles from "./App.module.css";
 
 export default function App() {
   const settingsOpen = useStoreState(state => state.settings.open);

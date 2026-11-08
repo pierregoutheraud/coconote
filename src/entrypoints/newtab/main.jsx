@@ -1,21 +1,10 @@
-import "@babel/polyfill";
 import React from "react";
 import ReactDOM from "react-dom";
 import { StoreProvider } from "easy-peasy";
-import App from "./App";
-import configureStore from "./store/configureStore";
-import storage from "./lib/storage";
-import "./index.css";
-
-if (module.hot) {
-  module.hot.dispose(function() {
-    // module is about to be replaced
-    chrome.storage.onChanged.removeListener(handleChanged);
-  });
-  module.hot.accept(function() {
-    // module or one of its dependencies was just updated
-  });
-}
+import App from "../../App";
+import configureStore from "../../store/configureStore";
+import storage from "../../lib/storage";
+import "../../index.css";
 
 let timeout = null;
 let tabId = null;

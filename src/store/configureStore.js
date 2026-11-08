@@ -1,4 +1,4 @@
-import { createStore, compose } from "easy-peasy";
+import { createStore } from "easy-peasy";
 import storage from "../lib/storage";
 import model from "./model";
 import saveMiddleware from "./saveMiddleware";

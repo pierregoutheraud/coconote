@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import cx from "classnames";
-import styles from "./Toggle.css";
+import styles from "./Toggle.module.css";
 
 // https://codepen.io/AlexJedi/pen/PKdxYE
 export default function Toggle({ defaultValue, onChange }) {

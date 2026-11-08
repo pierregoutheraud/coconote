@@ -18,7 +18,7 @@ body {
   transition: opacity 300ms;
   overflow-x: hidden;
 }
-:global(html.wf-active body) {
+html.wf-active body {
   opacity: 1;
 }
 
@@ -53,7 +53,7 @@ h6 {
   /* font-weight: 400; */
 }
 
-:global(#root) {
+#root {
   display: flex;
   min-height: 100%;
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import cx from "classnames";
-import styles from "./Radio.css";
+import styles from "./Radio.module.css";
 
 export default function InputRadio({
   id,

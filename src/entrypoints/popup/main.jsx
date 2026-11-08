@@ -1,15 +1,10 @@
-import "@babel/polyfill";
 import React from "react";
 import ReactDOM from "react-dom";
 import { StoreProvider } from "easy-peasy";
-import App from "./App";
-import configureStore from "./store/configureStore";
-import "./index.css";
-import "./popup.css";
-
-if (module.hot) {
-  module.hot.accept();
-}
+import App from "../../App";
+import configureStore from "../../store/configureStore";
+import "../../index.css";
+import "./style.css";
 
 async function render(force) {
   const store = await configureStore("popup");

@@ -10,7 +10,7 @@ import useNote from "../../hooks/useNote";
 import "draft-js/dist/Draft.css";
 import EditorToolbar from "../EditorToolbar/EditorToolbar";
 // import "draft-js-linkify-plugin/lib/plugin.css";
-import styles from "./Editor.css";
+import styles from "./Editor.module.css";
 
 const linkifyPlugin = createLinkifyPlugin({
   target: "_blank",

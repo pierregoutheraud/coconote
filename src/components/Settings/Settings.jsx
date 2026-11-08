@@ -3,7 +3,7 @@ import { useStoreState, useStoreActions } from "easy-peasy";
 import cx from "classnames";
 import FileSaver from "file-saver";
 
-import styles from "./Settings.css";
+import styles from "./Settings.module.css";
 import { FONTS } from "../../constants/constants";
 import Toggle from "../Toggle/Toggle";
 import Radio from "../Radio/Radio";

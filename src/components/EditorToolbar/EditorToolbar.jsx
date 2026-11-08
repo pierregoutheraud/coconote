@@ -4,7 +4,7 @@ import { RichUtils, getVisibleSelectionRect } from "draft-js";
 import cx from "classnames";
 
 import Icon from "../Icon/Icon";
-import styles from "./EditorToolbar.css";
+import styles from "./EditorToolbar.module.css";
 
 function useMergeState(initialState) {
   const [state, setState] = useState(initialState);

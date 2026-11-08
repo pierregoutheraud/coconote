@@ -1,14 +1,19 @@
 {
   "name": "coconote",
-  "version": "1.4.1",
+  "version": "1.5.0",
   "license": "MIT",
+  "private": true,
+  "packageManager": "pnpm@12.6.0",
   "scripts": {
-    "start": "parcel watch src/index.html src/popup.html --public-url=\"./\" --hmr-hostname localhost --hmr-port 63168",
-    "build": "rm -rf dist && rm -f ./dist.zip && rm -f ./dist-ff.zip && parcel build src/index.html src/popup.html --public-url=\"./\" --no-source-maps && cp -R icons ./dist/ && cp -R manifest-prod.json ./dist/manifest.json && zip -r -X dist.zip dist && cd dist && zip -X ../dist-ff.zip ./**/*"
+    "dev": "wxt",
+    "dev:firefox": "wxt -b firefox",
+    "build": "wxt build",
+    "build:firefox": "wxt build -b firefox",
+    "zip": "wxt zip",
+    "zip:firefox": "wxt zip -b firefox",
+    "postinstall": "wxt prepare"
   },
   "dependencies": {
-    "@babel/polyfill": "^7.0.0",
-    "chrome-storage-largesync": "^0.0.4",
     "classnames": "^2.2.6",
     "draft-js": "^0.10.5",
     "draft-js-linkify-plugin": "^2.0.1",
@@ -17,19 +22,15 @@
     "easy-peasy": "^2.1.5",
     "file-saver": "^2.0.2",
     "lz-string": "^1.4.4",
-    "postcss-modules": "^1.3.2",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
     "react-sortable-hoc": "^1.8.3",
     "uuid": "^3.3.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.1.6",
-    "@babel/plugin-proposal-class-properties": "^7.1.0",
-    "@babel/plugin-transform-async-to-generator": "^7.1.0",
-    "@babel/preset-react": "^7.0.0",
-    "@babel/preset-stage-0": "^7.0.0",
-    "cssnano": "^4.1.0",
-    "parcel-bundler": "^1.12.4"
+    "@wxt-dev/module-react": "^1.2.2",
+    "vite": "^8.3.6",
+    "web-ext": "^10.8.0",
+    "wxt": "^0.21.5"
   }
 }

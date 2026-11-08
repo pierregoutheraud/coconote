@@ -1,7 +1,7 @@
 import React from "react";
 import { useStoreState } from "easy-peasy";
 import cx from "classnames";
-import styles from "./SidebarButton.css";
+import styles from "./SidebarButton.module.css";
 
 export default function SidebarButton({
   className,

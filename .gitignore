@@ -1,6 +1,5 @@
 /node_modules
-/.cache
-/dist
+/.output
+/.wxt
+web-ext.config.ts
 .DS_Store
-dist-ff.zip
-dist.zip

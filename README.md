@@ -1,14 +1,34 @@
+Built with [WXT](https://wxt.dev) (Vite), Manifest V3 for Chrome and Firefox.
+
+# Requirements
+
+Node 22+ and pnpm (`corepack enable` picks the version pinned in `package.json`).
+
 # Install
 
-`yarn`
+`pnpm install`
 
 # Dev
 
-`yarn start`
+- `pnpm dev`: opens Chrome with the extension loaded, React components hot-reload on save.
+- `pnpm dev:firefox`: same in Firefox.
 
-# Build
+To use your own Chrome profile instead of a fresh one, see https://wxt.dev/guide/essentials/config/browser-startup.html (a git-ignored `web-ext.config.ts`).
 
-`yarn build`
+# Project structure
+
+- `src/entrypoints/newtab/`: the new tab page (becomes `chrome_url_overrides.newtab`).
+- `src/entrypoints/popup/`: the toolbar popup.
+- `public/icon/<size>.png`: extension icons, picked up automatically.
+- `wxt.config.ts`: manifest options (name, permissions, Firefox settings). The version comes from `package.json`.
+
+# Release
+
+1. Bump `version` in `package.json`.
+2. `pnpm zip`: `.output/coconote-<version>-chrome.zip` for the Chrome Web Store.
+3. `pnpm zip:firefox`: `.output/coconote-<version>-firefox.zip` and `.output/coconote-<version>-sources.zip` for Firefox Add-ons (AMO asks for the sources since the bundle is minified).
+
+Build instructions for AMO reviewers, from the sources zip: `pnpm install --frozen-lockfile && pnpm zip:firefox` (Node 22+, pnpm 12). The result is in `.output/firefox-mv3/`.
 
 # How does it work ?
 

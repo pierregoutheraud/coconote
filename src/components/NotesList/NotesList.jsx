@@ -8,7 +8,7 @@ import {
 } from "react-sortable-hoc";
 
 import Icon from "../Icon/Icon";
-import styles from "./NotesList.css";
+import styles from "./NotesList.module.css";
 import NotesListItem from "./NoteListItem";
 
 const SortableItem = SortableElement(NotesListItem);

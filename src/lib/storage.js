@@ -26,7 +26,7 @@ class Storage {
     return new Promise((resolve, reject) => {
       chrome.storage.sync.set(obj, function() {
         if (chrome.runtime.lastError) {
-          consoleh.error(chrome.runtime.lastError.message);
+          console.error(chrome.runtime.lastError.message);
           reject(chrome.runtime.lastError);
         }
         resolve();
